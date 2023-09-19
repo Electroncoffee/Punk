@@ -28,7 +28,7 @@ public class TalkManager : MonoBehaviour
     [Tooltip("Xml매니저 참조")]
     public XmlManager xmlmanager;
     int ID;
-    private void Awake()
+     void Start()
     {
         TalkSet.SetActive(false); //기본이미지만 켜놓기
         Talk_text.enabled = true; //기본텍스트만 켜놓기
