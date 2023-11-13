@@ -8,12 +8,15 @@ public class footBoard : MonoBehaviour
     public UnityEvent press;
     public UnityEvent pressDown;
     public UnityEvent pressOut;
+    public Sprite[] Switch;
     private bool lastcol = false;
     private BoxCollider2D col;
+    private SpriteRenderer sr;
 
     void Start()
     {
         col = GetComponent<BoxCollider2D>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -22,13 +25,13 @@ public class footBoard : MonoBehaviour
             press.Invoke();
             if(!lastcol){
                 pressDown.Invoke();
-                transform.localScale = new Vector3(1f,0.02f,1f);
+                sr.sprite = Switch[1];
             }
             lastcol = true;
         }else{
             if(lastcol){
                 pressOut.Invoke();
-                transform.localScale = new Vector3(1f,0.1f,1f);
+                sr.sprite = Switch[0];
             }
             lastcol = false;
         }

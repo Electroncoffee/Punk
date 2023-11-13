@@ -1,48 +1,47 @@
-using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-/*´ÙÀÌ¾ó·Î±×¿¡ ÇÊ¿äÇÑ ¸ğµç ¿ÀºêÁ§Æ® ÇÔ¼ö¸¦ ÂüÁ¶¹Ş¾Æ¼­ »ç¿ë
- XMLÀ» Á¦´ë·Î »ç¿ëÇÏ°Ô µÇ´Â °æ¿ì ¹®ÀÚ¿­ ½ºÇÃ¸´°ú °°Àº µ¥ÀÌÅÍ Ã³¸® ºÎºĞ ¼öÁ¤ µÉ ¿¹Á¤*/
+/*ë‹¤ì´ì–¼ë¡œê·¸ì— í•„ìš”í•œ ëª¨ë“  ì˜¤ë¸Œì íŠ¸ í•¨ìˆ˜ë¥¼ ì°¸ì¡°ë°›ì•„ì„œ ì‚¬ìš©
+ XMLì„ ì œëŒ€ë¡œ ì‚¬ìš©í•˜ê²Œ ë˜ëŠ” ê²½ìš° ë¬¸ìì—´ ìŠ¤í”Œë¦¿ê³¼ ê°™ì€ ë°ì´í„° ì²˜ë¦¬ ë¶€ë¶„ ìˆ˜ì • ë  ì˜ˆì •*/
 public class TalkManager : MonoBehaviour
 {
-    //´ëÈ­¹® ¿ÀºêÁ§Æ®(Ç×»ó Ç¥½Ã)
-    [Tooltip("´ëÈ­ ¿ÀºêÁ§Æ® ÀüÃ¼")]
+    //ëŒ€í™”ë¬¸ ì˜¤ë¸Œì íŠ¸(í•­ìƒ í‘œì‹œ)
+    [Tooltip("ëŒ€í™” ì˜¤ë¸Œì íŠ¸ ì „ì²´")]
     public GameObject TalkSet;
-    [Tooltip("°øÅë ´ëÈ­¹®")]
+    [Tooltip("ê³µí†µ ëŒ€í™”ë¬¸")]
     public Text Talk_text;
-    //´ëÈ­¹® ¿ÀºêÁ§Æ®(´ëÈ­ÀÏ¶§¸¸ Ç¥½Ã)
-    [Tooltip("ÇÃ·¹ÀÌ¾î ÀÌ¹ÌÁö ¹× ÅØ½ºÆ®")]
+    //ëŒ€í™”ë¬¸ ì˜¤ë¸Œì íŠ¸(ëŒ€í™”ì¼ë•Œë§Œ í‘œì‹œ)
+    [Tooltip("í”Œë ˆì´ì–´ ì´ë¯¸ì§€ ë° í…ìŠ¤íŠ¸")]
     public GameObject Player_Obj;
-    [Tooltip("NPC ÀÌ¹ÌÁö ¹× ÅØ½ºÆ®")]
+    [Tooltip("NPC ì´ë¯¸ì§€ ë° í…ìŠ¤íŠ¸")]
     public GameObject NPC_Obj;
-    //±×¿Ü
-    [Tooltip("ÇÃ·¹ÀÌ¾î ¿ÀºêÁ§Æ®")]
+    //ê·¸ì™¸
+    [Tooltip("í”Œë ˆì´ì–´ ì˜¤ë¸Œì íŠ¸")]
     public GameObject Player;
-    [Tooltip("½ºÄµµÈ ¿ÀºêÁ§Æ®")]
+    [Tooltip("ìŠ¤ìº”ëœ ì˜¤ë¸Œì íŠ¸")]
     public GameObject ScanObject;
 
-    //¿ÀºêÁ§Æ® ¿Ü º¯¼ö
-    [Tooltip("Xml¸Å´ÏÀú ÂüÁ¶")]
+    //ì˜¤ë¸Œì íŠ¸ ì™¸ ë³€ìˆ˜
+    [Tooltip("Xmlë§¤ë‹ˆì € ì°¸ì¡°")]
     public XmlManager xmlmanager;
     int ID;
      void Start()
     {
-        TalkSet.SetActive(false); //±âº»ÀÌ¹ÌÁö¸¸ ÄÑ³õ±â
-        Talk_text.enabled = true; //±âº»ÅØ½ºÆ®¸¸ ÄÑ³õ±â
+        TalkSet.SetActive(false); //ê¸°ë³¸ì´ë¯¸ì§€ë§Œ ì¼œë†“ê¸°
+        Talk_text.enabled = true; //ê¸°ë³¸í…ìŠ¤íŠ¸ë§Œ ì¼œë†“ê¸°
         ID = 0;
     }
     public void Action(GameObject scanObj)
     {
         ScanObject = scanObj;
         Obj_Dialog_Data objData = ScanObject.GetComponent<Obj_Dialog_Data>();
-        xmlmanager.LoadXml(objData.XmlName); //XML·ÎµåÇÏ±â
+        xmlmanager.LoadXml(objData.XmlName); //XMLë¡œë“œí•˜ê¸°
         bool Obj_Type = xmlmanager.Return_Object_Type();
-        ObjectType(Obj_Type); //¿ÀºêÁ§Æ® Å¸ÀÔ¿¡ ¸Â°Ô ¼³Á¤
-        TalkSet.SetActive(true); //´ëÈ­Ã¢ ÄÑ±â
-        Player.GetComponent<playerMoveMent>().enabled = false; //ÇÃ·¹ÀÌ¾î ¿òÁ÷ÀÓ ²ô±â
+        ObjectType(Obj_Type); //ì˜¤ë¸Œì íŠ¸ íƒ€ì…ì— ë§ê²Œ ì„¤ì •
+        TalkSet.SetActive(true); //ëŒ€í™”ì°½ ì¼œê¸°
+        Player.GetComponent<playerMoveMent>().enabled = false; //í”Œë ˆì´ì–´ ì›€ì§ì„ ë„ê¸°
         if (Obj_Type)
             Talk_NPC();
         else
@@ -58,27 +57,27 @@ public class TalkManager : MonoBehaviour
             Text Teller;
             if (inform.Position.Equals("Player"))
             {
-                Player_Obj.SetActive(true); //ÇÃ·¹ÀÌ¾î ¿ÀºêÁ§Æ® È°¼ºÈ­
-                Player_Obj.transform.Find("PlayerName").gameObject.SetActive(true);//ÇÃ·¹ÀÌ¾î ÀÌ¸§ È°¼ºÈ­
-                NPC_Obj.transform.Find("NPCName").gameObject.SetActive(false); //NPC ÀÌ¸§ ºñÈ°¼ºÈ­
-                Teller = Player_Obj.GetComponentInChildren<Text>(); //ÇÃ·¹ÀÌ¾î ÀÌ¸§ Àû¿ë
-                Sprite Player_Model = Resources.Load<Sprite>(inform.Model); //¸ğµ¨¸í°ú ÀÏÄ¡ÇÏ´Â ½ºÇÁ¶óÀÌÆ® ·Îµå
-                Player_Obj.transform.Find("Player Standing").GetComponent<Image>().sprite = Player_Model; //½ºÅÄµù ÀÌ¹ÌÁö Àû¿ë
-                NPC_Obj.transform.Find("NPC Standing").GetComponent<Image>().color = new Color(50, 50, 50, 255); //NPC ½ºÅÄµù ¾îµÓ°Ô
-                Player_Obj.transform.Find("Player Standing").GetComponent<Image>().color = new Color(255, 255, 255, 255); //ÇÃ·¹ÀÌ¾î ½ºÅÄµù ¹à°Ô
+                Player_Obj.SetActive(true); //í”Œë ˆì´ì–´ ì˜¤ë¸Œì íŠ¸ í™œì„±í™”
+                Player_Obj.transform.Find("PlayerName").gameObject.SetActive(true);//í”Œë ˆì´ì–´ ì´ë¦„ í™œì„±í™”
+                NPC_Obj.transform.Find("NPCName").gameObject.SetActive(false); //NPC ì´ë¦„ ë¹„í™œì„±í™”
+                Teller = Player_Obj.GetComponentInChildren<Text>(); //í”Œë ˆì´ì–´ ì´ë¦„ ì ìš©
+                Sprite Player_Model = Resources.Load<Sprite>(inform.Model); //ëª¨ë¸ëª…ê³¼ ì¼ì¹˜í•˜ëŠ” ìŠ¤í”„ë¼ì´íŠ¸ ë¡œë“œ
+                Player_Obj.transform.Find("Player Standing").GetComponent<Image>().sprite = Player_Model; //ìŠ¤íƒ ë”© ì´ë¯¸ì§€ ì ìš©
+                NPC_Obj.transform.Find("NPC Standing").GetComponent<Image>().color = new Color(50, 50, 50, 255); //NPC ìŠ¤íƒ ë”© ì–´ë‘¡ê²Œ
+                Player_Obj.transform.Find("Player Standing").GetComponent<Image>().color = new Color(255, 255, 255, 255); //í”Œë ˆì´ì–´ ìŠ¤íƒ ë”© ë°ê²Œ
                 NPC_Obj.transform.Find("NPC Standing").GetComponent<Image>().SetNativeSize();
                 Player_Obj.transform.Find("Player Standing").GetComponent<Image>().SetNativeSize();
             }
             else
             {
-                NPC_Obj.SetActive(true); //NPC ¿ÀºêÁ§Æ® È°¼ºÈ­
-                NPC_Obj.transform.Find("NPCName").gameObject.SetActive(true);//NPC ÀÌ¸§ È°¼ºÈ­
-                Player_Obj.transform.Find("PlayerName").gameObject.SetActive(false); //ÇÃ·¹ÀÌ¾î ÀÌ¸§ ºñÈ°¼ºÈ­
-                Teller = NPC_Obj.GetComponentInChildren<Text>(); //NPC ÀÌ¸§ Àû¿ë
-                Sprite Player_Model = Resources.Load<Sprite>(inform.Model); //¸ğµ¨¸í°ú ÀÏÄ¡ÇÏ´Â ½ºÇÁ¶óÀÌÆ® ·Îµå
-                NPC_Obj.transform.Find("NPC Standing").GetComponent<Image>().sprite = Player_Model; //½ºÅÄµù ÀÌ¹ÌÁö Àû¿ë
-                Player_Obj.transform.Find("Player Standing").GetComponent<Image>().color = new Color(50, 50, 50, 255); //ÇÃ·¹ÀÌ¾î ½ºÅÄµù ¾îµÓ°Ô
-                NPC_Obj.transform.Find("NPC Standing").GetComponent<Image>().color = new Color(255, 255, 255, 255); //NPC ½ºÅÄµù ¹à°Ô
+                NPC_Obj.SetActive(true); //NPC ì˜¤ë¸Œì íŠ¸ í™œì„±í™”
+                NPC_Obj.transform.Find("NPCName").gameObject.SetActive(true);//NPC ì´ë¦„ í™œì„±í™”
+                Player_Obj.transform.Find("PlayerName").gameObject.SetActive(false); //í”Œë ˆì´ì–´ ì´ë¦„ ë¹„í™œì„±í™”
+                Teller = NPC_Obj.GetComponentInChildren<Text>(); //NPC ì´ë¦„ ì ìš©
+                Sprite Player_Model = Resources.Load<Sprite>(inform.Model); //ëª¨ë¸ëª…ê³¼ ì¼ì¹˜í•˜ëŠ” ìŠ¤í”„ë¼ì´íŠ¸ ë¡œë“œ
+                NPC_Obj.transform.Find("NPC Standing").GetComponent<Image>().sprite = Player_Model; //ìŠ¤íƒ ë”© ì´ë¯¸ì§€ ì ìš©
+                Player_Obj.transform.Find("Player Standing").GetComponent<Image>().color = new Color(50, 50, 50, 255); //í”Œë ˆì´ì–´ ìŠ¤íƒ ë”© ì–´ë‘¡ê²Œ
+                NPC_Obj.transform.Find("NPC Standing").GetComponent<Image>().color = new Color(255, 255, 255, 255); //NPC ìŠ¤íƒ ë”© ë°ê²Œ
                 NPC_Obj.transform.Find("NPC Standing").GetComponent<Image>().SetNativeSize();
                 Player_Obj.transform.Find("Player Standing").GetComponent<Image>().SetNativeSize();
             }
@@ -88,8 +87,8 @@ public class TalkManager : MonoBehaviour
         else
         {
             ID = 0;
-            TalkSet.SetActive(false); //´ëÈ­Ã¢ Á¾·á
-            Player.GetComponent<playerMoveMent>().enabled = true; //ÇÃ·¹ÀÌ¾î ¿òÁ÷ÀÓ ²ô±â
+            TalkSet.SetActive(false); //ëŒ€í™”ì°½ ì¢…ë£Œ
+            Player.GetComponent<playerMoveMent>().enabled = true; //í”Œë ˆì´ì–´ ì›€ì§ì„ ë„ê¸°
             return;
         }
         ID++;

@@ -246,18 +246,15 @@ GameObject:
   - component: {fileID: 968710782075721264}
   - component: {fileID: 968710782075721265}
   - component: {fileID: 968710782075721267}
-  - component: {fileID: 968710782075721270}
   - component: {fileID: 968710782075721263}
   - component: {fileID: 968710782075721271}
-  - component: {fileID: 1259050794}
-  - component: {fileID: 1259050795}
   m_Layer: 7
   m_Name: player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &968710782075721268
 Transform:
   m_ObjectHideFlags: 0
@@ -438,20 +435,6 @@ MonoBehaviour:
   slidingAccel: 0.1
   Rate: 1
   gravity: 8
---- !u!114 &968710782075721270
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 968710782075721260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 555273f441a9f6343800cb87b3fc00e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentData: {fileID: 11400000, guid: e68c539caf7231b4f92916db013a330d, type: 2}
-  lastData: {fileID: 11400000, guid: 7aafb40569887ba45a66b61a77ab8b74, type: 2}
 --- !u!114 &968710782075721263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,131 +461,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 0}
   isNPC: 0
---- !u!114 &1259050794
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 968710782075721260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 197ad2a81a115bd4181d56c471b66474, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1259050795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 968710782075721260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 954e95ce69217d44196b5891824a3091, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHp: 10
-  Hp: 10
-  getDamage:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 968710782075721270}
-        m_TargetAssemblyTypeName: respawn, Assembly-CSharp
-        m_MethodName: setHealth
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 968710782075721267}
-        m_TargetAssemblyTypeName: playerMoveMent, Assembly-CSharp
-        m_MethodName: hit
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  getDamage_UI:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: HpUi, Assembly-CSharp
-        m_MethodName: SetHp
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  dead:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  getHeal:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 968710782075721270}
-        m_TargetAssemblyTypeName: respawn, Assembly-CSharp
-        m_MethodName: setHealth
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: respawn, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  getHeal_UI:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: HpUi, Assembly-CSharp
-        m_MethodName: SetHp
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &968710782107667799
 GameObject:
   m_ObjectHideFlags: 0
