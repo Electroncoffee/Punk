@@ -10,7 +10,6 @@ public class HpUi : MonoBehaviour
     public PlayerDataScriptableObject scriptable;
 
 
-    //읽는건 자유, 쓰는 건 private로 표기한다.
     public int Current_Hp;
 
     //Hp의 최대치 정의
