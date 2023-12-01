@@ -11,10 +11,9 @@ public class spike : MonoBehaviour
     {
         if (collision.transform.CompareTag("Player"))
         {
+            hp hp_control = collision.GetComponent<hp>();
 
-            HpUi Hp_Data = collision.GetComponent<HpUi>();
-
-            Hp_Data.SetHp(-1);
+            hp_control.damage(1);
 
             spike_hit.Invoke(new Vector3(spike_tel_pos[0], spike_tel_pos[1], 0));
         }
