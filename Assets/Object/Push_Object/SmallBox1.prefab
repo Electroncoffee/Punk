@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5652769385310216342}
   - component: {fileID: 4473424690954862723}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: StandZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 7557799184570080064}
   - component: {fileID: 7557799184570080065}
   - component: {fileID: 7557799184570080067}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: SmallBox1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
