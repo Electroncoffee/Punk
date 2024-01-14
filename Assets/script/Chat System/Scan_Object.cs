@@ -3,25 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-/*FÀÔ·Â ½Ã ÇÃ·¹ÀÌ¾î Äİ¶óÀÌ´õ¿Í Ãæµ¹µÈ NPC·¹ÀÌ¾î ¿ÀºêÁ§Æ®°¡ ÀÖÀ¸¸é ÇØ´ç ¿ÀºêÁ§Æ®¸¦ °ÔÀÓ¸Å´ÏÀú¿¡ Àü´Ş*/
+/*Fì…ë ¥ ì‹œ í”Œë ˆì´ì–´ ì½œë¼ì´ë”ì™€ ì¶©ëŒëœ NPCë ˆì´ì–´ ì˜¤ë¸Œì íŠ¸ê°€ ìˆìœ¼ë©´ í•´ë‹¹ ì˜¤ë¸Œì íŠ¸ë¥¼ ê²Œì„ë§¤ë‹ˆì €ì— ì „ë‹¬*/
 public class Scan_Object : MonoBehaviour
 {
-    UnityEvent chat;
     GameObject ScanObject;
-    public TalkManager manager;
-    public bool isNPC; //NPC Trigger Ãæµ¹¿©ºÎ
+    playerMoveMent moveMent;
+    public bool isNPC; //NPC Trigger ì¶©ëŒì—¬ë¶€
     private void Start()
     {
         isNPC = false;
+        moveMent = this.gameObject.GetComponent<playerMoveMent>();
     }
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.F) && isNPC) //Æ®¸®°Å¿¡ ´ëÈ­°¡´É ¿ÀºêÁ§Æ® ÁøÀÔ½Ã F¹öÆ°À¸·Î ´ëÈ­ ÁøÀÔ
+        if (Input.GetKeyUp(KeyCode.F) && isNPC) //íŠ¸ë¦¬ê±°ì— ëŒ€í™”ê°€ëŠ¥ ì˜¤ë¸Œì íŠ¸ ì§„ì…ì‹œ Fë²„íŠ¼ìœ¼ë¡œ ëŒ€í™” ì§„ì…
         {
-            manager.Action(ScanObject);
+            if (moveMent.enabled)
+            {
+                TalkManager.Instance.start_dialogue(ScanObject.GetComponent<NPC_info>().return_xmlname());
+                moveMent.enabled = false;
+            }
+            else
+            {
+                TalkManager.Instance.next_dialogue();
+                if (!TalkManager.Instance.visible.activeSelf)
+                    moveMent.enabled = true;
+            }
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision) //NPC ¿ÀºêÁ§Æ®¿Í Ãæµ¹ ½Ã ÇÃ·¡±× º¯°æ ¹× ¿ÀºêÁ§Æ® ÀúÀå
+    private void OnTriggerEnter2D(Collider2D collision) //NPC ì˜¤ë¸Œì íŠ¸ì™€ ì¶©ëŒ ì‹œ í”Œë˜ê·¸ ë³€ê²½ ë° ì˜¤ë¸Œì íŠ¸ ì €ì¥
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("NPC"))
         {
@@ -29,7 +39,7 @@ public class Scan_Object : MonoBehaviour
             ScanObject = collision.gameObject;
         }
     }
-    private void OnTriggerExit2D(Collider2D collision) //Ãæµ¹µÈ ¿ÀºêÁ§Æ® Å»Ãâ ½Ã ÇÃ·¡±× º¯°æ ¹× ¿ÀºêÁ§Æ® »èÁ¦
+    private void OnTriggerExit2D(Collider2D collision) //ì¶©ëŒëœ ì˜¤ë¸Œì íŠ¸ íƒˆì¶œ ì‹œ í”Œë˜ê·¸ ë³€ê²½ ë° ì˜¤ë¸Œì íŠ¸ ì‚­ì œ
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("NPC"))
         {

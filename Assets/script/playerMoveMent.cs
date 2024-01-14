@@ -73,8 +73,6 @@ public class playerMoveMent : MonoBehaviour
         spRend = GetComponent<SpriteRenderer>();
 
         rb.gravityScale = gravity;
-
-        
     }
 
     void Update()

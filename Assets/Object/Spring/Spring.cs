@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Spring : MonoBehaviour
 {
+    public float spring_jumpforce;
     private float time;
     private EdgeCollider2D bc;
     private Animator anim;
@@ -18,7 +19,7 @@ public class Spring : MonoBehaviour
         if (collision.transform.CompareTag("Player"))
         {
             anim.Play("Jump_");
-            collision.gameObject.GetComponent<playerMoveMent>().Jump(2500);
+            collision.gameObject.GetComponent<playerMoveMent>().Jump(spring_jumpforce);
             Invoke("Idle", time);
         }
     }
