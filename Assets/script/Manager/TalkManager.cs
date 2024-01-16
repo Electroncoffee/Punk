@@ -1,108 +1,156 @@
-using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
-/*´ÙÀÌ¾ó·Î±×¿¡ ÇÊ¿äÇÑ ¸ğµç ¿ÀºêÁ§Æ® ÇÔ¼ö¸¦ ÂüÁ¶¹Ş¾Æ¼­ »ç¿ë
- XMLÀ» Á¦´ë·Î »ç¿ëÇÏ°Ô µÇ´Â °æ¿ì ¹®ÀÚ¿­ ½ºÇÃ¸´°ú °°Àº µ¥ÀÌÅÍ Ã³¸® ºÎºĞ ¼öÁ¤ µÉ ¿¹Á¤*/
-public class TalkManager : MonoBehaviour
+/*ë‹¤ì´ì–¼ë¡œê·¸ì— í•„ìš”í•œ ëª¨ë“  ì˜¤ë¸Œì íŠ¸ í•¨ìˆ˜ë¥¼ ì°¸ì¡°ë°›ì•„ì„œ ì‚¬ìš©
+ XMLì„ ì œëŒ€ë¡œ ì‚¬ìš©í•˜ê²Œ ë˜ëŠ” ê²½ìš° ë¬¸ìì—´ ìŠ¤í”Œë¦¿ê³¼ ê°™ì€ ë°ì´í„° ì²˜ë¦¬ ë¶€ë¶„ ìˆ˜ì • ë  ì˜ˆì •*/
+
+[System.Serializable]
+public struct Dialogue //ë‹¤ì´ì–¼ë¡œê·¸ ìš”ì†Œ ì •ë³´ë¥¼ ë‹´ì€ í´ë˜ìŠ¤
 {
-    //´ëÈ­¹® ¿ÀºêÁ§Æ®(Ç×»ó Ç¥½Ã)
-    [Tooltip("´ëÈ­ ¿ÀºêÁ§Æ® ÀüÃ¼")]
-    public GameObject TalkSet;
-    [Tooltip("°øÅë ´ëÈ­¹®")]
-    public Text Talk_text;
-    //´ëÈ­¹® ¿ÀºêÁ§Æ®(´ëÈ­ÀÏ¶§¸¸ Ç¥½Ã)
-    [Tooltip("ÇÃ·¹ÀÌ¾î ÀÌ¹ÌÁö ¹× ÅØ½ºÆ®")]
-    public GameObject Player_Obj;
-    [Tooltip("NPC ÀÌ¹ÌÁö ¹× ÅØ½ºÆ®")]
-    public GameObject NPC_Obj;
-    //±×¿Ü
-    [Tooltip("ÇÃ·¹ÀÌ¾î ¿ÀºêÁ§Æ®")]
-    public GameObject Player;
-    [Tooltip("½ºÄµµÈ ¿ÀºêÁ§Æ®")]
-    public GameObject ScanObject;
-
-    //¿ÀºêÁ§Æ® ¿Ü º¯¼ö
-    [Tooltip("Xml¸Å´ÏÀú ÂüÁ¶")]
-    public XmlManager xmlmanager;
-    int ID;
-     void Start()
+    public string L_name; //ìºë¦­í„°ì˜ ì´ë¦„
+    public string R_name; //ìºë¦­í„°ì˜ ì´ë¦„
+    [TextArea] //ì—¬ëŸ¬ ì¤„ ì“¸ ìˆ˜ ìˆê²Œ í•´ì¤Œ
+    public string script; //ëŒ€í™” ë‚´ìš©
+    public Sprite L_img; //ì™¼ìª½ ìºë¦­í„°ì˜ ìŠ¤íƒ ë”©
+    public Sprite R_img; //ì˜¤ë¥¸ìª½ ìºë¦­í„°ì˜ ìŠ¤íƒ ë”©
+    public bool subject; //true=L false=R
+    public string effect;
+}
+public class TalkManager : MonoBehaviour //ë‹¤ì´ì–¼ë¡œê·¸ ì¶œë ¥ì„ ìœ„í•œ í´ë˜ìŠ¤
+{
+    private static TalkManager Talkmgr;
+    public static TalkManager Instance
     {
-        TalkSet.SetActive(false); //±âº»ÀÌ¹ÌÁö¸¸ ÄÑ³õ±â
-        Talk_text.enabled = true; //±âº»ÅØ½ºÆ®¸¸ ÄÑ³õ±â
-        ID = 0;
-    }
-    public void Action(GameObject scanObj)
-    {
-        ScanObject = scanObj;
-        Obj_Dialog_Data objData = ScanObject.GetComponent<Obj_Dialog_Data>();
-        xmlmanager.LoadXml(objData.XmlName); //XML·ÎµåÇÏ±â
-        bool Obj_Type = xmlmanager.Return_Object_Type();
-        ObjectType(Obj_Type); //¿ÀºêÁ§Æ® Å¸ÀÔ¿¡ ¸Â°Ô ¼³Á¤
-        TalkSet.SetActive(true); //´ëÈ­Ã¢ ÄÑ±â
-        Player.GetComponent<playerMoveMent>().enabled = false; //ÇÃ·¹ÀÌ¾î ¿òÁ÷ÀÓ ²ô±â
-        if (Obj_Type)
-            Talk_NPC();
-        else
-            Talk_Object();
-
-    }
-
-    void Talk_NPC()
-    {
-        Dialog_inform inform = xmlmanager.Return_Dialog(ID);
-        if (inform != null)
+        get
         {
-            Text Teller;
-            if (inform.Position.Equals("Player"))
+            if (Talkmgr == null)
             {
-                Player_Obj.SetActive(true); //ÇÃ·¹ÀÌ¾î ¿ÀºêÁ§Æ® È°¼ºÈ­
-                Player_Obj.transform.Find("PlayerName").gameObject.SetActive(true);//ÇÃ·¹ÀÌ¾î ÀÌ¸§ È°¼ºÈ­
-                NPC_Obj.transform.Find("NPCName").gameObject.SetActive(false); //NPC ÀÌ¸§ ºñÈ°¼ºÈ­
-                Teller = Player_Obj.GetComponentInChildren<Text>(); //ÇÃ·¹ÀÌ¾î ÀÌ¸§ Àû¿ë
-                Sprite Player_Model = Resources.Load<Sprite>(inform.Model); //¸ğµ¨¸í°ú ÀÏÄ¡ÇÏ´Â ½ºÇÁ¶óÀÌÆ® ·Îµå
-                Player_Obj.transform.Find("Player Standing").GetComponent<Image>().sprite = Player_Model; //½ºÅÄµù ÀÌ¹ÌÁö Àû¿ë
-                NPC_Obj.transform.Find("NPC Standing").GetComponent<Image>().color = new Color(50, 50, 50, 255); //NPC ½ºÅÄµù ¾îµÓ°Ô
-                Player_Obj.transform.Find("Player Standing").GetComponent<Image>().color = new Color(255, 255, 255, 255); //ÇÃ·¹ÀÌ¾î ½ºÅÄµù ¹à°Ô
-                NPC_Obj.transform.Find("NPC Standing").GetComponent<Image>().SetNativeSize();
-                Player_Obj.transform.Find("Player Standing").GetComponent<Image>().SetNativeSize();
+                Talkmgr = FindObjectOfType<TalkManager>();
+                if (Talkmgr == null)
+                {
+                    GameObject obj = new GameObject();
+                    obj.name = typeof(XmlManager).Name;
+                    Talkmgr = obj.AddComponent<TalkManager>();
+                }
             }
+            return Talkmgr;
+        }
+    }
+    [SerializeField]
+    public Image[] stand_images;
+    [SerializeField] public GameObject visible;
+
+    [SerializeField] Image L_img; //ì™¼ìª½ ìºë¦­í„° ìŠ¤í”„ë¼ì´íŠ¸
+    [SerializeField] Image R_img; //ì˜¤ë¥¸ìª½ ìºë¦­í„° ìŠ¤í”„ë¼ì´íŠ¸
+    [SerializeField] Text L_name; //ì™¼ìª½ ì´ë¦„ í…ìŠ¤íŠ¸
+    [SerializeField] Text R_name; //ì™¼ìª½ ì´ë¦„ í…ìŠ¤íŠ¸
+    [SerializeField] Text script; //ëŒ€í™” ë‚´ìš© í…ìŠ¤íŠ¸
+
+    [SerializeField] CanvasRenderer canvasRenderer;
+
+    [SerializeField] float txt_speed;
+
+    [SerializeField] Queue<Dialogue> dialogues; //Dialogue êµ¬ì¡°ì²´ í ì„ ì–¸
+    [SerializeField] int black_color_value;
+    Color dark, white;
+    private Dialogue current_dialogue;
+
+
+    public bool istyping=false;
+    string currentText;
+
+    private void Awake() //ì‹±ê¸€í†¤ ì‚¬ìš©í•´ì„œ ì–´ë””ì„œë“  start í•¨ìˆ˜ë¥¼ ì“¸ ìˆ˜ ìˆê²Œ
+    {
+        if (Talkmgr == null) {
+            Talkmgr = this as TalkManager;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else {
+            Destroy(this.gameObject);
+        }
+        visible.SetActive(false);
+        istyping = false;
+        dark = new Color(black_color_value / 255f, black_color_value / 255f, black_color_value / 255f, 1f);
+        white = new Color(1f, 1f, 1f, 1f);
+    }
+
+    public void start_dialogue(string Xmlname) //ë‹¤ì´ì–¼ë¡œê·¸ë¥¼ ì‹œì‘í•˜ëŠ” í•¨ìˆ˜
+    {
+        dialogues = XmlManager.Instance.Return_Dialogue(Xmlname);
+        next_dialogue();
+        visible.SetActive(true);
+    }
+
+    public void next_dialogue() //ë‹¤ìŒ ë‹¤ì´ì–¼ë¡œê·¸ë¡œ ë„˜ì–´ê°€ëŠ” í•¨ìˆ˜
+    {
+        if (istyping)//íƒ€ì´í•‘ì¤‘ì— í´ë¦­ë˜ì—ˆìœ¼ë¯€ë¡œ, ì „ë¶€ ì¶œë ¥í•´ì¤Œ.
+        {
+            StopAllCoroutines();
+            script.text = currentText;
+            istyping = false;
+        }
+        else if (!istyping && dialogues.Count!=0)//ì „ë¶€ ì¶œë ¥ë¬ëŠ”ë°, ì•„ì§ ì•ˆëë‚¬ìœ¼ë‹ˆ ë‹¤ìŒêº¼ ì¶œë ¥
+        {
+            current_dialogue = dialogues.Dequeue();
+            string txt_change = current_dialogue.script;
+
+            //ë‹¤ìŒ ë°°ì—´ë¡œ
+            L_name.text = current_dialogue.L_name;
+            R_name.text = current_dialogue.R_name;
+            script.text = current_dialogue.script;
+            L_img.sprite = current_dialogue.L_img;
+            R_img.sprite = current_dialogue.R_img;
+            Image_black(current_dialogue.subject);
+            //ìŠ¤í”„ë¼ì´íŠ¸ ì—†ìœ¼ë©´ ìŠ¤í”„ë¼ì´íŠ¸ ë„ê¸°
+            if (current_dialogue.L_img == null)
+                L_img.gameObject.SetActive(false);
             else
-            {
-                NPC_Obj.SetActive(true); //NPC ¿ÀºêÁ§Æ® È°¼ºÈ­
-                NPC_Obj.transform.Find("NPCName").gameObject.SetActive(true);//NPC ÀÌ¸§ È°¼ºÈ­
-                Player_Obj.transform.Find("PlayerName").gameObject.SetActive(false); //ÇÃ·¹ÀÌ¾î ÀÌ¸§ ºñÈ°¼ºÈ­
-                Teller = NPC_Obj.GetComponentInChildren<Text>(); //NPC ÀÌ¸§ Àû¿ë
-                Sprite Player_Model = Resources.Load<Sprite>(inform.Model); //¸ğµ¨¸í°ú ÀÏÄ¡ÇÏ´Â ½ºÇÁ¶óÀÌÆ® ·Îµå
-                NPC_Obj.transform.Find("NPC Standing").GetComponent<Image>().sprite = Player_Model; //½ºÅÄµù ÀÌ¹ÌÁö Àû¿ë
-                Player_Obj.transform.Find("Player Standing").GetComponent<Image>().color = new Color(50, 50, 50, 255); //ÇÃ·¹ÀÌ¾î ½ºÅÄµù ¾îµÓ°Ô
-                NPC_Obj.transform.Find("NPC Standing").GetComponent<Image>().color = new Color(255, 255, 255, 255); //NPC ½ºÅÄµù ¹à°Ô
-                NPC_Obj.transform.Find("NPC Standing").GetComponent<Image>().SetNativeSize();
-                Player_Obj.transform.Find("Player Standing").GetComponent<Image>().SetNativeSize();
-            }
-            Teller.text = inform.Teller;
-            Talk_text.text = inform.Content;
+                L_img.gameObject.SetActive(true);
+            if (current_dialogue.R_img == null)
+                R_img.gameObject.SetActive(false);
+            else
+                R_img.gameObject.SetActive(true);
+            StartCoroutine(Typing(txt_change));
+        }
+        else//ëŒ€í™”ì¢…ë£Œì´ë¯€ë¡œ ëŒ€í™”ë¬¸ ì•ˆë³´ì´ê²Œ
+        {
+            visible.SetActive(false);
+        }
+    }
+    
+    //L(T)/R(F)ì…ë ¥ì— ë§ê²Œ ì´ë¯¸ì§€ë¥¼ ê¹Œë§£ê²Œ ë§Œë“¤ì–´ì¤Œ
+    private void Image_black(bool flag)
+    {
+        if (flag)
+        {
+            L_img.color = white;
+            R_img.color = dark;
         }
         else
         {
-            ID = 0;
-            TalkSet.SetActive(false); //´ëÈ­Ã¢ Á¾·á
-            Player.GetComponent<playerMoveMent>().enabled = true; //ÇÃ·¹ÀÌ¾î ¿òÁ÷ÀÓ ²ô±â
-            return;
+            L_img.color = dark;
+            R_img.color = white;
         }
-        ID++;
     }
 
-    void Talk_Object()
+    IEnumerator Typing(string text)
     {
+        script.text = string.Empty;
+        currentText = text;
 
-    }
+        StringBuilder stringBuilder = new StringBuilder();
 
-    void ObjectType(bool isVisible) //true - dialogue, description - false
-    {
-        Player_Obj.SetActive(isVisible);
-        NPC_Obj.SetActive(isVisible);
+        for (int i = 0; i < text.Length; i++)
+        {
+            stringBuilder.Append(text[i]);
+            script.text = stringBuilder.ToString();
+
+            yield return new WaitForSeconds(txt_speed);
+            istyping = true;
+        }
+        istyping = false;
     }
 }

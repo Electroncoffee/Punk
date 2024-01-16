@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class keyScript : MonoBehaviour
 {
+    public PlayerDataScriptableObject currentData;
     public string keyName;
     public int count;
 
     void OnTriggerEnter2D(Collider2D other){
-        
-        respawn respawnScript = other.gameObject.GetComponent<respawn>();
-        if(respawnScript){
-            respawnScript.getKey(keyName,count);
-            this.gameObject.SetActive(false);
-        }
+        currentData.getKey(keyName, count);
+        this.gameObject.SetActive(false);
     }
 }
