@@ -57,7 +57,7 @@ public class SoundManger : MonoBehaviour
     public void PlaySfx(Sfx sfx)
     {
         //사용형식
-        //SoundManger.instance.PlaySfx(AudioManger.Sfx.Start) == 시작 버튼 효과음 재생
+        //SoundManger.instance.PlaySfx(SoundManger.Sfx.Start); == 시작 버튼 효과음 재생
 
         for(int i =0; i < sfxPlayers.Length; i++)
         {
