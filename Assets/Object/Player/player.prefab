@@ -110,9 +110,9 @@ GameObject:
   m_Component:
   - component: {fileID: 968710780684373978}
   - component: {fileID: 968710780684373981}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leftcol
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -168,9 +168,9 @@ GameObject:
   m_Component:
   - component: {fileID: 968710780838703640}
   - component: {fileID: 968710780838703643}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: jumpTrigger
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -226,9 +226,9 @@ GameObject:
   m_Component:
   - component: {fileID: 968710781182403893}
   - component: {fileID: 968710781182403892}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: rightcol
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -284,9 +284,9 @@ GameObject:
   m_Component:
   - component: {fileID: 968710781570004461}
   - component: {fileID: 968710781570004460}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: crouchheadcol
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -560,7 +560,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c1d7c4a9306bb445a7364e5058f2333, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 0}
   isNPC: 0
 --- !u!1 &968710782107667799
 GameObject:
@@ -574,7 +573,7 @@ GameObject:
   - component: {fileID: 968710782107667801}
   m_Layer: 7
   m_Name: crouch
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

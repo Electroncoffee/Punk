@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class playerMoveMent : MonoBehaviour
 {
@@ -31,6 +31,7 @@ public class playerMoveMent : MonoBehaviour
     private float dashT = 0f;//대쉬하고나서 지난시간
     private Vector2 velBefDash;//대쉬이전의 속도 저장하는 곳
     private bool isGround;
+    public bool isPlatform;
     private bool spontaneityAnim = false;
     public float jumpAnimTime = 0.35f;
     public float landAnimTime = 0.1f;
@@ -57,8 +58,9 @@ public class playerMoveMent : MonoBehaviour
     public float Rate;
     public float gravity = 8f;
 
-
-
+    private string[] grounds = { "ground", "platform" };//밟을 수 있는 레이어이름 배열
+    private string playerlayer = "player";
+    private string platformlayer = "platform";
 
     void Start()
     {   //컴포넌트 불러오기
@@ -71,7 +73,6 @@ public class playerMoveMent : MonoBehaviour
         standardCol = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
         spRend = GetComponent<SpriteRenderer>();
-
         rb.gravityScale = gravity;
     }
 
@@ -123,15 +124,16 @@ public class playerMoveMent : MonoBehaviour
         //점프 기능
         if (isGround && Input.GetKeyDown("space") && !Dashing)
         {
-            Jump();
+            if (isPlatform && Input.GetKey(KeyCode.S))//아래점프 기능
+                downJump();
+            else
+                Jump();
         }
 
         //이단점프
         if (!isGround && secondJumpAble && Input.GetKeyDown("space") && !Dashing && !grabWall)
         {
-
             secondJump();
-
         }
 
         //대쉬 기능
@@ -156,8 +158,19 @@ public class playerMoveMent : MonoBehaviour
 
     private void updateSetup()
     {
-        isGround = bottomcol.IsTouchingLayers(LayerMask.GetMask("ground"));//지면과 접촉여부를 판단하는 변수
-
+        isGround = false;
+        foreach (string layer in grounds)
+        {
+            if (bottomcol.IsTouchingLayers(LayerMask.GetMask(layer)))
+            {
+                isGround = true;
+                break;
+            }
+        }
+        if (bottomcol.IsTouchingLayers(LayerMask.GetMask(platformlayer)))
+            isPlatform = true;
+        else
+            isPlatform = false;
         hori = Input.GetAxisRaw("Horizontal");//좌우 입력
     }
     private void updateLast()
@@ -220,6 +233,13 @@ public class playerMoveMent : MonoBehaviour
         Invoke("toIdle", secondJumpAnimTime);
         secondJumpAble = false;
     }
+    public void downJump()
+    {
+        Debug.Log("아래점프");
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer(playerlayer), LayerMask.NameToLayer(platformlayer), true);
+        Invoke("downjumpEnd", 0.5f);
+        Debug.Log("아래점프 종료");
+    }
     public void wallJump(bool dir)
     {
         if (Input.GetKeyDown("space") && !Crouch && !isGround && !Dashing)
@@ -235,7 +255,6 @@ public class playerMoveMent : MonoBehaviour
             }
             else
             {
-
                 rb.AddForce(wallJumpPower);
             }
             changeAnim((int)animIndex.wallJump);
@@ -519,6 +538,10 @@ public class playerMoveMent : MonoBehaviour
         Dashing = false;//대쉬 끝
         //changeAnim((int)animIndex.idle);
         spontaneityAnim = false;
+    }
+    void downjumpEnd()
+    {//아래점프 끝날때 실행되는 함수
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer(playerlayer), LayerMask.NameToLayer(platformlayer), false);
     }
     void lookTrue()
     {
