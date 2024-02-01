@@ -2461,6 +2461,56 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Grass_Tile92_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 96
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -48, y: 13}
+        - {x: -48, y: -19}
+        - {x: 48, y: -19}
+        - {x: 48, y: 13}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 302faedc4ab12bb4e957456928b125c5
+      internalID: 1244947431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_Tile92_1
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 0
+        width: 136
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -64, y: 13}
+        - {x: -64, y: -19}
+        - {x: 64, y: -19}
+        - {x: 64, y: 13}
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1ee7e43c927af9438a2713a844bd84c
+      internalID: -1360255480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -2501,6 +2551,7 @@ TextureImporter:
       "\uD0C0\uC77C\uC14B \uD480\uBC2D 2\uBC30_40": 788948255
       "\uD0C0\uC77C\uC14B \uD480\uBC2D 2\uBC30_28": 61118330
       "\uD0C0\uC77C\uC14B \uD480\uBC2D 2\uBC30_88": -179467332
+      Grass_Tile92_1: -1360255480
       "\uD0C0\uC77C\uC14B \uD480\uBC2D 2\uBC30_33": 736022499
       "\uD0C0\uC77C\uC14B \uD480\uBC2D 2\uBC30_1": 368237374
       "\uD0C0\uC77C\uC14B \uD480\uBC2D 2\uBC30_26": -477822832
@@ -2516,8 +2567,9 @@ TextureImporter:
       "\uD0C0\uC77C\uC14B \uD480\uBC2D 2\uBC30_31": -481766989
       "\uD0C0\uC77C\uC14B \uD480\uBC2D 2\uBC30_3": 1774093934
       "\uD0C0\uC77C\uC14B \uD480\uBC2D 2\uBC30_71": -736580717
-      "\uD0C0\uC77C\uC14B \uD480\uBC2D 2\uBC30_12": 1801154448
+      Grass_Tile92_0: 1244947431
       "\uD0C0\uC77C\uC14B \uD480\uBC2D 2\uBC30_56": -1064301903
+      "\uD0C0\uC77C\uC14B \uD480\uBC2D 2\uBC30_12": 1801154448
       "\uD0C0\uC77C\uC14B \uD480\uBC2D 2\uBC30_7": -85965686
       "\uD0C0\uC77C\uC14B \uD480\uBC2D 2\uBC30_61": 912730796
       "\uD0C0\uC77C\uC14B \uD480\uBC2D 2\uBC30_49": 1585049004

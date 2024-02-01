@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class platform : MonoBehaviour
 {
-    public Transform[] desPos = new Transform[4];
-    private Transform chasingpos;
+    public Transform[] desPos;
+    public Transform chasingpos;
     public float platform_speed;
+    public float delay;
     public bool platform_is_move;
     // Start is called before the first frame update
     void Start()
@@ -14,7 +15,7 @@ public class platform : MonoBehaviour
         chasingpos = desPos[1];
         InvokeRepeating("check_pos", 0.1f, 0.1f);
     }
-    //ÇÃ·¹ÀÌ¾î°¡ ÇÃ·§Æû¿¡ Å¾½ÂÇÏ¸é °°ÀÌ ¿òÁ÷ÀÌ°Ô À§Ä¡¸¦ ÀÚ½ÄÀ¸·Î ¿Å±â±â
+    //í”Œë ˆì´ì–´ê°€ í”Œë«í¼ì— íƒ‘ìŠ¹í•˜ë©´ ê°™ì´ ì›€ì§ì´ê²Œ ìœ„ì¹˜ë¥¼ ìì‹ìœ¼ë¡œ ì˜®ê¸°ê¸°
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.transform.CompareTag("Player"))
@@ -36,14 +37,17 @@ public class platform : MonoBehaviour
     }
     void check_pos()
     {
-        if (transform.position == desPos[0].position)
-            chasingpos = desPos[1];
-        if (transform.position == desPos[1].position)
-            chasingpos = desPos[2];
-        if (transform.position == desPos[2].position)
-            chasingpos = desPos[3];
-        if (transform.position == desPos[3].position)
-            chasingpos = desPos[0];
+        for (int i = 0; i < desPos.Length; i++)
+        {
+            if (transform.position == desPos[i].position)
+            {
+                Debug.Log("ë„ì°© ì¢Œí‘œë³€ê²½" + i);
+                if (i != desPos.Length - 1)
+                    StartCoroutine(change_chasingpos(i+1));
+                else
+                    StartCoroutine(change_chasingpos(0));
+            }
+        }
     }
     public void platform_move()
     {
@@ -52,5 +56,11 @@ public class platform : MonoBehaviour
     public void platform_stop()
     {
         platform_is_move = false;
+    }
+
+    IEnumerator change_chasingpos(int num)
+    {
+        yield return new WaitForSeconds(delay);
+        chasingpos = desPos[num];
     }
 }

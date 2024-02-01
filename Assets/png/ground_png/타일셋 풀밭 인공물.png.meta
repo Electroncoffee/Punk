@@ -1280,6 +1280,56 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: "\uD0C0\uC77C\uC14B \uD480\uBC2D \uC778\uACF5\uBB3C_54"
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 0
+        width: 148
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -74, y: 16}
+        - {x: -74, y: -16}
+        - {x: 74, y: -16}
+        - {x: 74, y: 16}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91c510b9288a10f4d88a7c64733f1de3
+      internalID: -1511742551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\uD0C0\uC77C\uC14B \uD480\uBC2D \uC778\uACF5\uBB3C_55"
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 96
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -48, y: 16}
+        - {x: -48, y: -16}
+        - {x: 48, y: -16}
+        - {x: 48, y: 16}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 754453cd3c71332449b62d853a3bc5fb
+      internalID: 1781866063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -1309,6 +1359,7 @@ TextureImporter:
       "\uD0C0\uC77C\uC14B \uD480\uBC2D \uC778\uACF5\uBB3C_14": -419729519
       "\uD0C0\uC77C\uC14B \uD480\uBC2D \uC778\uACF5\uBB3C_16": 1585398448
       "\uD0C0\uC77C\uC14B \uD480\uBC2D \uC778\uACF5\uBB3C_20": -1539206032
+      "\uD0C0\uC77C\uC14B \uD480\uBC2D \uC778\uACF5\uBB3C_54": -1511742551
       "\uD0C0\uC77C\uC14B \uD480\uBC2D \uC778\uACF5\uBB3C_49": 1676816795
       "\uD0C0\uC77C\uC14B \uD480\uBC2D \uC778\uACF5\uBB3C_8": -1801237903
       "\uD0C0\uC77C\uC14B \uD480\uBC2D \uC778\uACF5\uBB3C_19": -1751025249
@@ -1332,6 +1383,7 @@ TextureImporter:
       "\uD0C0\uC77C\uC14B \uD480\uBC2D \uC778\uACF5\uBB3C_18": -1969422917
       "\uD0C0\uC77C\uC14B \uD480\uBC2D \uC778\uACF5\uBB3C_33": -508437321
       "\uD0C0\uC77C\uC14B \uD480\uBC2D \uC778\uACF5\uBB3C_12": 408798406
+      "\uD0C0\uC77C\uC14B \uD480\uBC2D \uC778\uACF5\uBB3C_55": 1781866063
       "\uD0C0\uC77C\uC14B \uD480\uBC2D \uC778\uACF5\uBB3C_34": -1964538603
       "\uD0C0\uC77C\uC14B \uD480\uBC2D \uC778\uACF5\uBB3C_30": 706371187
       "\uD0C0\uC77C\uC14B \uD480\uBC2D \uC778\uACF5\uBB3C_17": -2002047067
