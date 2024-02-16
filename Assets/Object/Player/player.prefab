@@ -516,6 +516,7 @@ MonoBehaviour:
   dashPower: {x: 120, y: 0}
   dashTime: 0.07
   dashCoolTime: 1
+  isPlatform: 0
   jumpAnimTime: 0.35
   landAnimTime: 0.1
   crouchingTIme: 0.3
@@ -528,7 +529,7 @@ MonoBehaviour:
   hitAnimTime: 0.25
   runMaxSpeed: 15
   runAccel: 2
-  runDeccel: 1
+  runDeccel: 10
   accelInAir: 0.8
   deccelInAir: 0.05
   crouchMaxSpeed_: 5

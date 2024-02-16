@@ -16,8 +16,9 @@ public class Scan_Object : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.F) && isNPC) //트리거에 대화가능 오브젝트 진입시 F버튼으로 대화 진입
+        if (InputManager.Instance.GetKeyUpP(KeyMap.Act) && isNPC) //트리거에 대화가능 오브젝트 진입시 F버튼으로 대화 진입
         {
+            Debug.Log("다이얼로그 작동");
             if (moveMent.enabled)
             {
                 TalkManager.Instance.start_dialogue(ScanObject.GetComponent<NPC_info>().return_xmlname());

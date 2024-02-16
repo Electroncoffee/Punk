@@ -31,7 +31,7 @@ public class TalkManager : MonoBehaviour //다이얼로그 출력을 위한 클�
                 Talkmgr = FindObjectOfType<TalkManager>();
                 if (Talkmgr == null)
                 {
-                    GameObject obj = new GameObject();
+                    GameObject obj = new ();
                     obj.name = typeof(XmlManager).Name;
                     Talkmgr = obj.AddComponent<TalkManager>();
                 }
@@ -141,7 +141,7 @@ public class TalkManager : MonoBehaviour //다이얼로그 출력을 위한 클�
         script.text = string.Empty;
         currentText = text;
 
-        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder stringBuilder = new ();
 
         for (int i = 0; i < text.Length; i++)
         {

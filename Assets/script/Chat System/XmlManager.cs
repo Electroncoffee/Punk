@@ -13,6 +13,7 @@ using UnityEngine.UI;
 public class XmlManager : MonoBehaviour
 {
     private static XmlManager xmlmgr;
+    public LanguageManager languagemgr;
     public static XmlManager Instance
     {
         get
@@ -54,7 +55,16 @@ public class XmlManager : MonoBehaviour
 
     private string Xmladdress(string XmlName)
     {
-        return "Assets/script/Chat System/xml/" + XmlName;
+        string language_file;
+        if(languagemgr.setlanguage==GameLanguage.ENGLISH)
+        {
+            language_file = "EN/";
+        }
+        else
+        {
+            language_file = "KO/";
+        }
+        return "Assets/script/Chat System/xml/" + language_file + XmlName;
     }
 
     //Xml 이름을 받아서 초기화, 실패 시 로그 출력 후 false반환

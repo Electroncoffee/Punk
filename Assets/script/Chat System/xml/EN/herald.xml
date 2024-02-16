@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--구조가 이해되지 않는다면 defaultxml.xml을 참조-->
+<ScenarioRoot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ObjectType>T</ObjectType>
+  <!--Group는 Dialogue로만 이루어지며 대화 전문입니다-->
+  <Group>
+    <!--1개의 Dialogue가 1번의 대화입니다.-->
+    <Dialogue Subject="F" Effect="Null">
+      <L_name>???</L_name>
+      <L_img>alice_stand</L_img>
+      <R_name>Herald</R_name>
+      <R_img>rabbit_stand</R_img>
+      <script>hello Rookie.
+Welcome to abandoned factory.</script>
+    </Dialogue>
+    <Dialogue Subject="T" Effect="Null">
+      <L_name>???</L_name>
+      <L_img>alice_stand</L_img>
+      <R_name>Herald</R_name>
+      <R_img>rabbit_stand</R_img>
+      <script>...?</script>
+    </Dialogue>
+    <Dialogue Subject="F" Effect="Null">
+      <L_name>???</L_name>
+      <L_img>alice_stand</L_img>
+      <R_name>Herald</R_name>
+      <R_img>rabbit_stand</R_img>
+      <script>Looks like this is your first time here.
+      </script>
+    </Dialogue>
+    <Dialogue Subject="T" Effect="Null">
+      <L_name>???</L_name>
+      <L_img>alice_stand</L_img>
+      <R_name>Herald</R_name>
+      <R_img>rabbit_stand</R_img>
+      <script>(nod)</script>
+    </Dialogue>
+  </Group>
+</ScenarioRoot>

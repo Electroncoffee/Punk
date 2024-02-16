@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 3705804924310407210}
   - component: {fileID: 3705804924310407209}
   - component: {fileID: 2708466954454561725}
+  - component: {fileID: 8264587821178609788}
+  - component: {fileID: 8904248392199394557}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -45,13 +47,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc0aed226c10ae54484917f4f5d033e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TalkSet: {fileID: 0}
-  Talk_text: {fileID: 0}
-  Player_Obj: {fileID: 0}
-  NPC_Obj: {fileID: 0}
-  Player: {fileID: 0}
-  ScanObject: {fileID: 0}
-  xmlmanager: {fileID: 2708466954454561725}
+  stand_images: []
+  visible: {fileID: 0}
+  L_img: {fileID: 0}
+  R_img: {fileID: 0}
+  L_name: {fileID: 0}
+  R_name: {fileID: 0}
+  script: {fileID: 0}
+  canvasRenderer: {fileID: 0}
+  txt_speed: 0.05
+  black_color_value: 150
+  istyping: 0
 --- !u!114 &2708466954454561725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,5 +68,36 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 93a0e69c6656625419c0686c8c1f30d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languagemgr: {fileID: 8264587821178609788}
+  Stand:
+  - {fileID: 21300000, guid: a9d9eaa729cd64e43b962b60a50b734c, type: 3}
+  - {fileID: 21300000, guid: 68c1100a9e4e21f44a710c53d995dd33, type: 3}
+  - {fileID: 21300000, guid: 268d18360fec8144d857ec6eea994e0c, type: 3}
+  - {fileID: 21300000, guid: 69cf04c59dfca274ab328226de452fe8, type: 3}
+--- !u!114 &8264587821178609788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3705804924310407208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d3cb185c4ec10541b732e257dff7c72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  setlanguage: 0
+--- !u!114 &8904248392199394557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3705804924310407208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dca30c7d29dd26468a891af7035b72e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

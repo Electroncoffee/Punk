@@ -10226,22 +10226,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 519420031, guid: 92588b2a4af082d4dbe0be1f06dab047, type: 3}
-      propertyPath: m_BackGroundColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 519420031, guid: 92588b2a4af082d4dbe0be1f06dab047, type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 0.57254905
-      objectReference: {fileID: 0}
-    - target: {fileID: 519420031, guid: 92588b2a4af082d4dbe0be1f06dab047, type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 0.43529415
-      objectReference: {fileID: 0}
-    - target: {fileID: 519420031, guid: 92588b2a4af082d4dbe0be1f06dab047, type: 3}
-      propertyPath: m_BackGroundColor.r
-      value: 0.43529415
-      objectReference: {fileID: 0}
     - target: {fileID: 968710782075721260, guid: 92588b2a4af082d4dbe0be1f06dab047, type: 3}
       propertyPath: m_Name
       value: player
@@ -10289,10 +10273,6 @@ PrefabInstance:
     - target: {fileID: 968710782075721268, guid: 92588b2a4af082d4dbe0be1f06dab047, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 968710782075721269, guid: 92588b2a4af082d4dbe0be1f06dab047, type: 3}
-      propertyPath: m_FlipX
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92588b2a4af082d4dbe0be1f06dab047, type: 3}
