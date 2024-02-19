@@ -1,45 +1,102 @@
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class HpUi : MonoBehaviour
 {
 
-    //사용중인 하트 UI를 모아놓은 집합체
-    public Image[] Heart;
-
-    public PlayerDataScriptableObject scriptable;
-
     //읽는건 자유, 쓰는 건 private로 표기한다.
     public int Hp { get; private set; }
     //Hp의 최대치 정의
-    private int max_hp;
-    //앞에 그려질 것과 뒤에 그려질 것
-    public Sprite Back, Front;
+    private int max_hp = 3;
+
+    public Animator anim;
+    enum animList {Hp3Idle, Hp3Reduce, Hp2Idle, Hp2Reduce, Hp1Idle, Hp1Reduce, Hp0Idle}
 
     public void StartSetHpUI(int maxhp, int hp)
     {
         //Hp_Max의 사이즈를 정의
-        this.max_hp = maxhp;
+        max_hp = maxhp;
 
         //Hp 초기화.
-        this.Hp = hp;
+        Hp = hp;
 
-        //Front 이미지 모두 제거
-        for (int i = 0; i < 5; i++)
-            Heart[i].sprite = Back;
+        switch(Hp)
+        {
+            case 0 :
+            anim.Play("Hp0Idle");
+            break;
 
-        //Front 이미지 초기화
-        for (int i = 0; i < Hp; i++)
-            Heart[i].sprite = Front;
+            case 1 :
+            anim.Play("Hp1Idle");
+            break;
 
-        //현재 체력만큼만 활성화
-        for (int i = 0; i < 5; i++)
-            if (max_hp <= i-1)
-            {
-                Heart[i].gameObject.SetActive(false);
-            }
+            case 2 :
+            anim.Play("Hp2Idle");
+            break;
+
+            case 3 :
+            anim.Play("Hp3Idle");
+            break;
+
+            default :
+            break;
+
+        }
+
     }
+
+    // 경우의 수
+    /*
+
+    Hp 3->2  / 2->3
+    Hp 2->1  / 1->2
+    Hp 1->0
+
+    총 5가지
+
+    HP3Idle -> Hp3Reduce -> Hp2Idle
+
+    Hp2Idle -> Hp3Reduce(역재생) -> Hp3Idle
+
+    Hp2Idle -> Hp2Reduce -> Hp1Idle
+
+    체력 감소 이벤트가 발생할 때 함께 사용되며 UI를 변경하는 스크립트를 목표로함
+    */
+
+    public void Dameged(int d)
+    {
+        Hp -= d;
+        Mathf.Clamp(Hp, 0, max_hp);
+        if(Hp == 2)
+        {
+            anim.Play("Hp3Reduce");
+        }
+        else if(Hp == 1)
+        {
+            anim.Play("Hp2Reduce");
+        }
+        else if(Hp == 0)
+        {
+            anim.Play("Hp1Reduce");
+        }
+    }
+
+    public void Heal(int h)
+    {
+        Hp += h;
+        Mathf.Clamp(Hp, 0, max_hp);
+        if(Hp == 2)
+        {
+            anim.Play("Heal2");
+        }
+        else if(Hp == 3)
+        {
+            anim.Play("Heal3");
+        }
+    }
+
 
     public void SetHpUI(int val)
     {
@@ -49,15 +106,6 @@ public class HpUi : MonoBehaviour
         //Hp가 0밑으로 내려가면 0으로 고정하고, Hp_Max를 초과하려고 하면 Hp_Max로 고정함.
         Hp = Mathf.Clamp(Hp, 0, max_hp);
 
-        //Front 이미지 모두 제거
-        for (int i = 0; i < max_hp; i++)
-            Heart[i].sprite = Back;
-
-        //Front 이미지 그리기
-        for (int i = 0; i < max_hp; i++)
-            if (Hp > i)
-            {
-                Heart[i].sprite = Front;
-            }
     }
+
 }

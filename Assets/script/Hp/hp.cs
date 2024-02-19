@@ -42,6 +42,7 @@ public class hp : MonoBehaviour
     }
     public void damage(int d){
         currentData.health -= d;
+        hpUi.Dameged(d);
         getDamage.Invoke(); //캐릭터 피해모션 재생함수
         getDamage_UI.Invoke(currentData.health); //UI 갱신
         if(currentData.health <= 0){
@@ -55,6 +56,7 @@ public class hp : MonoBehaviour
             currentData.health += d;
         else//최대체력이라 회복불가
             currentData.health = currentData.current_max_health;
+        hpUi.Heal(d);
         getHeal.Invoke(); //캐릭터 회복모션(이펙트) 재생함수
         getHeal_UI.Invoke(currentData.health); //UI 갱신
         Debug.Log(currentData.health);
@@ -78,7 +80,11 @@ public class hp : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            damage(5);//데미지 입히기
+            damage(1);//데미지 입히기
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            heal(1);//데미지 입히기
         }
         if (Input.GetKeyDown(KeyCode.K))
         {//현재가진 열쇠 콘솔로 띄우기
