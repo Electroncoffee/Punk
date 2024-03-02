@@ -74,23 +74,4 @@ public class hp : MonoBehaviour
         currentData.deadCnt++;//죽은 횟수 추가
         SceneManager.LoadScene(lastData.sceneName);
     }
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            damage(5);//데미지 입히기
-        }
-        if (Input.GetKeyDown(KeyCode.K))
-        {//현재가진 열쇠 콘솔로 띄우기
-            Debug.Log("current");
-            currentData.keyPrint();
-            Debug.Log("last");
-            lastData.keyPrint();
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {//열쇠 초기화
-            currentData.resetKey();
-            lastData.resetKey();
-        }
-    }
 }

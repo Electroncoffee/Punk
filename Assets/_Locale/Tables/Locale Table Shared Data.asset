@@ -23,6 +23,58 @@ MonoBehaviour:
     m_Key: UI-Language_en
     m_Metadata:
       m_Items: []
+  - m_Id: 5995346511785984
+    m_Key: UI-Language_lang
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6742764329525248
+    m_Key: UI-Language_resol
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6742776925020160
+    m_Key: UI-Language_key
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6742803198140416
+    m_Key: UI-Language_Up
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6742804867473408
+    m_Key: UI-Language_Down
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6742809233743872
+    m_Key: UI-Language_Left
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6742810043244544
+    m_Key: UI-Language_Right
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6742810764664832
+    m_Key: UI-Language_Jump
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6742811486085120
+    m_Key: UI-Language_Crouch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6742815785246720
+    m_Key: UI-Language_Dash
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6742817160978432
+    m_Key: UI-Language_Act
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6742818075336704
+    m_Key: UI-Language_Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6757174997573632
+    m_Key: New Entry
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

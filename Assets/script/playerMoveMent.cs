@@ -84,7 +84,7 @@ public class playerMoveMent : MonoBehaviour
         look();
 
         //벽 점프
-        if (rightcol.IsTouchingLayers(LayerMask.GetMask("ground")) && Input.GetKey(KeyCode.D))
+        if (rightcol.IsTouchingLayers(LayerMask.GetMask("ground")) && InputManager.Instance.GetKeyP(KeyMap.Right))
         {
             wallGrab();
             spRend.flipX = false;
@@ -92,7 +92,7 @@ public class playerMoveMent : MonoBehaviour
             wallJump(true);
 
         }
-        else if (leftcol.IsTouchingLayers(LayerMask.GetMask("ground")) && Input.GetKey(KeyCode.A))
+        else if (leftcol.IsTouchingLayers(LayerMask.GetMask("ground")) && InputManager.Instance.GetKeyP(KeyMap.Left))
         {
             wallGrab();
             spRend.flipX = true;
@@ -106,7 +106,7 @@ public class playerMoveMent : MonoBehaviour
         }
 
         //웅크리기 기능
-        if (Input.GetKeyDown(KeyCode.LeftControl) && !Dashing)
+        if (InputManager.Instance.GetKeyDownP(KeyMap.Crouch) && !Dashing)
         {
             crouch();
         }
@@ -121,28 +121,27 @@ public class playerMoveMent : MonoBehaviour
         }
 
         //점프 기능
-        if (isGround && Input.GetKeyDown("space") && !Dashing)
+        if (isGround && InputManager.Instance.GetKeyDownP(KeyMap.Jump) && !Dashing)
         {
-            if (isPlatform && Input.GetKey(KeyCode.S))//아래점프 기능
+            if (isPlatform && InputManager.Instance.GetKeyP(KeyMap.Down))//아래점프 기능
                 downJump();
             else
                 Jump();
         }
-
         //이단점프
-        if (!isGround && secondJumpAble && Input.GetKeyDown("space") && !Dashing && !grabWall)
+        if (!isGround && secondJumpAble && InputManager.Instance.GetKeyDownP(KeyMap.Jump) && !Dashing && !grabWall)
         {
             secondJump();
         }
 
         //대쉬 기능
-        if (able_dash && dashT > dashCoolTime && Input.GetKeyDown(KeyCode.LeftShift))
+        if (able_dash && dashT > dashCoolTime && InputManager.Instance.GetKeyDownP(KeyMap.Dash))
         {
-            if (Input.GetKey(KeyCode.A))
+            if (InputManager.Instance.GetKeyP(KeyMap.Left))
             {
                 dash(false);
             }
-            else if (Input.GetKey(KeyCode.D))
+            else if (InputManager.Instance.GetKeyP(KeyMap.Right))
             {
                 dash(true);
             }
@@ -170,7 +169,7 @@ public class playerMoveMent : MonoBehaviour
             isPlatform = true;
         else
             isPlatform = false;
-        hori = Input.GetAxisRaw("Horizontal");//좌우 입력
+        hori = InputManager.Instance.GetRawHorizon();//좌우 입력
     }
     private void updateLast()
     {
@@ -241,7 +240,7 @@ public class playerMoveMent : MonoBehaviour
     }
     public void wallJump(bool dir)
     {
-        if (Input.GetKeyDown("space") && !Crouch && !isGround && !Dashing)
+        if (InputManager.Instance.GetKeyDownP(KeyMap.Jump) && !Crouch && !isGround && !Dashing)
         {
             spontaneityAnim = true;
             lookAble = false;
@@ -250,7 +249,6 @@ public class playerMoveMent : MonoBehaviour
             if (dir)
             {
                 rb.AddForce(new Vector2(-wallJumpPower.x, wallJumpPower.y));
-
             }
             else
             {

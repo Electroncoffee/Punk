@@ -26,6 +26,54 @@ MonoBehaviour:
     m_Localized: English
     m_Metadata:
       m_Items: []
+  - m_Id: 5995346511785984
+    m_Localized: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6742764329525248
+    m_Localized: resolution
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6742776925020160
+    m_Localized: Keyboard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6742803198140416
+    m_Localized: Up
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6742804867473408
+    m_Localized: Down
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6742809233743872
+    m_Localized: Left
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6742810043244544
+    m_Localized: Right
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6742810764664832
+    m_Localized: Jump
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6742811486085120
+    m_Localized: Crouch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6742815785246720
+    m_Localized: Dash
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6742817160978432
+    m_Localized: Act
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6742818075336704
+    m_Localized: Menu
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

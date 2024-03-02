@@ -1,8 +1,11 @@
 using UnityEngine;
+using UnityEngine.UI;
 public enum GameLanguage { ENGLISH, KOREAN }
 public class LanguageManager : MonoBehaviour
 {
     public GameLanguage setlanguage;
+    [SerializeField]
+    Dropdown dropdown;
     private void Awake()
     {
         if (Application.systemLanguage == SystemLanguage.English)
@@ -15,21 +18,21 @@ public class LanguageManager : MonoBehaviour
         }
         else
             setlanguage = GameLanguage.ENGLISH;
+        dropdown.value = (int)setlanguage;
         Debug.Log("Language Set Completed :" + setlanguage);
     }
-    public void Set_language(int Inputlanguage)
+    public void Set_language()
     {
-        if (Inputlanguage == (int)GameLanguage.ENGLISH)
+        if (dropdown.value == (int)GameLanguage.ENGLISH)
         {
             setlanguage = GameLanguage.ENGLISH;
         }
-        else if (Inputlanguage == (int)GameLanguage.KOREAN)
+        else if (dropdown.value == (int)GameLanguage.KOREAN)
         {
             setlanguage = GameLanguage.KOREAN;
         }
         else
         {
-            setlanguage = GameLanguage.ENGLISH;
             Debug.Log("잘못된 인수 입력됨");
         }
         Debug.Log("Language Set Completed :" + setlanguage);

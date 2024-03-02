@@ -13,6 +13,9 @@ GameObject:
   - component: {fileID: 2708466954454561725}
   - component: {fileID: 8264587821178609788}
   - component: {fileID: 8904248392199394557}
+  - component: {fileID: 1197374336}
+  - component: {fileID: 1197374337}
+  - component: {fileID: 1197374340}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -101,3 +104,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dca30c7d29dd26468a891af7035b72e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  KeyValuePairs:
+    keys: 0000000001000000020000000300000004000000050000000600000007000000
+    values: 770000007300000061000000640000002000000030010000660000001b000000
+--- !u!114 &1197374336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3705804924310407208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b30e2383b0f3de741bdbdfa3a663b1e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resolutionDropdown: {fileID: 0}
+  fullscreenBtn: {fileID: 0}
+  resolutionNum: 0
+--- !u!114 &1197374337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3705804924310407208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64bdac6a6e37b6944862a81e85d3a210, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgmClip: {fileID: 8300000, guid: abe7c5504d4c0524697c2dcce9b8e254, type: 3}
+  bgmVolume: 1
+  bgmPlayer: {fileID: 0}
+  sfxClips: []
+  sfxVolume: 1
+  channels: 0
+  sfxPlayers: []
+  channelIndex: 0
+--- !u!114 &1197374340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3705804924310407208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cb2dc2ce3818234bbd44a0547e2e190, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgmSlider: {fileID: 0}
+  sfxSlider: {fileID: 0}

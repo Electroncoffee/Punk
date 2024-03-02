@@ -16,19 +16,30 @@ public enum KeyMap
     Left,//2
     Right,//3
     Jump,//4
-    Dash,//5
-    Act//6
+    Crouch,//5
+    Dash,//6
+    Act,//7
+    Menu//8
 }
 public class InputManager : MonoBehaviour
 {
     public static InputManager Instance;
     [SerializeField]
-    private SerializableDictionary<KeyMap, KeyCode> KeyValuePairs = new ();
+    SerializableDictionary<KeyMap, KeyCode> KeyValuePairs = new() {
+        { KeyMap.Up,KeyCode.W},
+        { KeyMap.Down,KeyCode.S},
+        { KeyMap.Left,KeyCode.A},
+        { KeyMap.Right,KeyCode.D},
+        { KeyMap.Jump,KeyCode.Space },
+        { KeyMap.Crouch,KeyCode.LeftControl},
+        { KeyMap.Dash,KeyCode.LeftShift},
+        { KeyMap.Act,KeyCode.F},
+        { KeyMap.Menu,KeyCode.Escape}
+    };
     private int InputKey=-1;
     void Awake()
     {
         Instance = this;
-        KeyValuePairs.Add(KeyMap.Act,KeyCode.F);
     }
     public KeyCode ReturnKey(KeyMap key)
     {
@@ -46,12 +57,23 @@ public class InputManager : MonoBehaviour
     {
         return Input.GetKey(ReturnKey(key));
     }
+    public float GetRawHorizon()
+    {
+        if (GetKeyP(KeyMap.Left))
+            return -1f;
+        else if (GetKeyP(KeyMap.Right))
+            return 1f;
+        else
+            return 0f;
+    }
     private void OnGUI()
     {
         Event KeyEvent = Event.current;
-        if (KeyEvent.isKey)
+        if (KeyEvent.isKey&&InputKey!=-1)
         {
+            Debug.Log("키매핑 입력됨: "+InputKey+" "+KeyEvent.keyCode);
             KeyValuePairs[(KeyMap)InputKey] = KeyEvent.keyCode;
+            Debug.Log("변경된 값: " + KeyValuePairs[(KeyMap)InputKey]);
             InputKey = -1;
         }
     }
