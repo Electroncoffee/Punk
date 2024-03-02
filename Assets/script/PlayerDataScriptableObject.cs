@@ -13,7 +13,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "playerData", menuName = "ScriptableObject/playerData")]
 public class PlayerDataScriptableObject : ScriptableObject
 {
-    const int max_health = 5;
+    const int max_health = 3;
     const int start_health = 3;
     public List<key> keys = new List<key>();//열쇠 리스트
     public int coin;

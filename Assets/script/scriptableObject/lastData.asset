@@ -16,5 +16,5 @@ MonoBehaviour:
   coin: 0
   current_max_health: 3
   health: 3
-  sceneName: 
+  sceneName: Stage 1-1
   deadCnt: 0
