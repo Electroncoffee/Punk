@@ -17,7 +17,7 @@ public class Option : MonoBehaviour
         if (InputManager.Instance.GetKeyDownP(KeyMap.Menu))
         {
             opt.SetActive(!opt.activeSelf);
-            Time.timeScale = Time.timeScale == 0 ? 1 : 0;
+            Time.timeScale = opt.activeSelf ? 0 : 1;
         }
     }
 }

@@ -72,7 +72,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 6757174997573632
-    m_Key: New Entry
+    m_Key: UI-Language_newgame
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6823456233119744
+    m_Key: UI-Language_option
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6823478655868928
+    m_Key: UI-Language_exit
     m_Metadata:
       m_Items: []
   m_Metadata:

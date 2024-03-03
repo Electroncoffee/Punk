@@ -44,6 +44,7 @@ public class playerMoveMent : MonoBehaviour
     private bool grabWall = false;
     private bool lookAble = true;
     public float hitAnimTime = 0.25f;
+    public float deadAnimTime = 2f;
     private bool move = true;
 
     public float runMaxSpeed;
@@ -560,5 +561,12 @@ public class playerMoveMent : MonoBehaviour
     void hitEnd()
     {
         move = true;
+    }
+    public void dead()
+    {
+        spontaneityAnim = true;
+        changeAnim((int)animIndex.dead);
+        move = false;
+        this.GetComponent<playerMoveMent>().enabled = false;
     }
 }

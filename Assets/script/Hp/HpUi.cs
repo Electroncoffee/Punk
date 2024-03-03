@@ -12,36 +12,35 @@ public class HpUi : MonoBehaviour
     private int max_hp = 3;
 
     public Animator anim;
-    enum animList {Hp3Idle, Hp3Reduce, Hp2Idle, Hp2Reduce, Hp1Idle, Hp1Reduce, Hp0Idle}
-
-    public void StartSetHpUI(int maxhp, int hp)
+    enum animList { Hp3Idle, Hp3Reduce, Hp2Idle, Hp2Reduce, Hp1Idle, Hp1Reduce, Hp0Idle }
+    public void StartSetHpUI(int maxhp)
     {
         //Hp_Max의 사이즈를 정의
         max_hp = maxhp;
 
         //Hp 초기화.
-        Hp = hp;
+        Hp = maxhp;
 
-        switch(Hp)
+        switch (Hp)
         {
-            case 0 :
-            anim.Play("Hp0Idle");
-            break;
+            case 0:
+                anim.Play("Hp0Idle");
+                break;
 
-            case 1 :
-            anim.Play("Hp1Idle");
-            break;
+            case 1:
+                anim.Play("Hp1Idle");
+                break;
 
-            case 2 :
-            anim.Play("Hp2Idle");
-            break;
+            case 2:
+                anim.Play("Hp2Idle");
+                break;
 
-            case 3 :
-            anim.Play("Hp3Idle");
-            break;
+            case 3:
+                anim.Play("Hp3Idle");
+                break;
 
-            default :
-            break;
+            default:
+                break;
 
         }
 
@@ -69,35 +68,19 @@ public class HpUi : MonoBehaviour
     {
         Hp -= d;
         Mathf.Clamp(Hp, 0, max_hp);
-        if(Hp == 2)
+        if (Hp == 2)
         {
             anim.Play("Hp3Reduce");
         }
-        else if(Hp == 1)
+        else if (Hp == 1)
         {
             anim.Play("Hp2Reduce");
         }
-        else if(Hp == 0)
+        else if (Hp == 0)
         {
             anim.Play("Hp1Reduce");
         }
     }
-
-    public void Heal(int h)
-    {
-        Hp += h;
-        Mathf.Clamp(Hp, 0, max_hp);
-        if(Hp == 2)
-        {
-            anim.Play("Heal2");
-        }
-        else if(Hp == 3)
-        {
-            anim.Play("Heal3");
-        }
-    }
-
-
     public void SetHpUI(int val)
     {
         //Hp 감소
@@ -107,5 +90,4 @@ public class HpUi : MonoBehaviour
         Hp = Mathf.Clamp(Hp, 0, max_hp);
 
     }
-
 }

@@ -34,11 +34,11 @@ RectTransform:
   m_Father: {fileID: 6417872310098510224}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -413.5, y: 221.00002}
-  m_SizeDelta: {x: 250, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 100, y: -100}
+  m_SizeDelta: {x: 675, y: 275}
+  m_Pivot: {x: 0, y: 1}
 --- !u!222 &6461591515008342631
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -106,11 +106,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6417872310098510224}
-  - component: {fileID: 2797203367973758274}
-  - component: {fileID: 8111516008551249774}
   - component: {fileID: 3996768146049063625}
   - component: {fileID: 2733701956567530013}
   - component: {fileID: 1728875341847838034}
+  - component: {fileID: 2797203367973758274}
+  - component: {fileID: 8111516008551249774}
+  - component: {fileID: 6400616188420686602}
   m_Layer: 5
   m_Name: HPUI
   m_TagString: Untagged
@@ -139,46 +140,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &2797203367973758274
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9124856778543481012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 954e95ce69217d44196b5891824a3091, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  getDamage:
-    m_PersistentCalls:
-      m_Calls: []
-  getDamage_UI:
-    m_PersistentCalls:
-      m_Calls: []
-  getHeal:
-    m_PersistentCalls:
-      m_Calls: []
-  getHeal_UI:
-    m_PersistentCalls:
-      m_Calls: []
-  hpUi: {fileID: 8111516008551249774}
-  currentData: {fileID: 11400000, guid: e68c539caf7231b4f92916db013a330d, type: 2}
-  lastData: {fileID: 11400000, guid: 7aafb40569887ba45a66b61a77ab8b74, type: 2}
---- !u!114 &8111516008551249774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9124856778543481012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf36eba77cdf3664fabc2f63048dfd2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anim: {fileID: 5055673265295029396}
 --- !u!223 &3996768146049063625
 Canvas:
   m_ObjectHideFlags: 0
@@ -212,10 +173,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 3840, y: 2160}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -240,3 +201,83 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &2797203367973758274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9124856778543481012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 954e95ce69217d44196b5891824a3091, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  getDamage:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 968710782075721267, guid: 92588b2a4af082d4dbe0be1f06dab047, type: 3}
+        m_TargetAssemblyTypeName: playerMoveMent, Assembly-CSharp
+        m_MethodName: hit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  dead:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 968710782075721267, guid: 92588b2a4af082d4dbe0be1f06dab047, type: 3}
+        m_TargetAssemblyTypeName: playerMoveMent, Assembly-CSharp
+        m_MethodName: dead
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4753055808939329140, guid: 8cfe5764c3b6f984b947e491ea6cc14c, type: 3}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  hpUi: {fileID: 8111516008551249774}
+--- !u!114 &8111516008551249774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9124856778543481012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf36eba77cdf3664fabc2f63048dfd2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 5055673265295029396}
+--- !u!114 &6400616188420686602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9124856778543481012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c4361a3ec4fca24c8cda912965acef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

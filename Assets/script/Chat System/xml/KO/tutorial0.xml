@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--구조가 이해되지 않는다면 defaultxml.xml을 참조-->
+<ScenarioRoot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ObjectType>T</ObjectType>
+  <!--Group는 Dialogue로만 이루어지며 대화 전문입니다-->
+  <Group>
+    <!--1개의 Dialogue가 1번의 대화입니다.-->
+    <Dialogue Subject="F" Effect="Null">
+      <L_name>앨리스</L_name>
+      <L_img>alice_stand</L_img>
+      <R_name>표지판</R_name>
+      <R_img>null</R_img>
+      <script>조작법 설명1
+좌:A,우:D,점프:space</script>
+    </Dialogue>
+  </Group>
+</ScenarioRoot>
