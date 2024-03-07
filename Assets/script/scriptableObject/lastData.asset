@@ -17,4 +17,4 @@ MonoBehaviour:
   current_max_health: 3
   health: 3
   sceneName: Stage 1-1
-  deadCnt: 0
+  deadCnt: 20

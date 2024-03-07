@@ -15,6 +15,6 @@ MonoBehaviour:
   keys: []
   coin: 0
   current_max_health: 3
-  health: 3
+  health: 1
   sceneName: 
-  deadCnt: 0
+  deadCnt: 20
