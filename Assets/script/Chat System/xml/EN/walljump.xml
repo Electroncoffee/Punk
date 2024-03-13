@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--구조가 이해되지 않는다면 defaultxml.xml을 참조-->
+<ScenarioRoot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ObjectType>T</ObjectType>
+  <!--Group는 Dialogue로만 이루어지며 대화 전문입니다-->
+  <Group>
+    <!--1개의 Dialogue가 1번의 대화입니다.-->
+    <Dialogue Subject="F" Effect="Null">
+      <L_name>앨리스</L_name>
+      <L_img>alice_stand</L_img>
+      <R_name>Old note</R_name>
+      <R_img>null</R_img>
+      <script>You'd better look closely at the wall.
+Some walls can be climbed.</script>
+    </Dialogue>
+    <Dialogue Subject="F" Effect="Null">
+      <L_name>앨리스</L_name>
+      <L_img>alice_stand</L_img>
+      <R_name>System</R_name>
+      <R_img>null</R_img>
+      <script>Wall Jump Unlock
+      </script>
+    </Dialogue>
+  </Group>
+</ScenarioRoot>

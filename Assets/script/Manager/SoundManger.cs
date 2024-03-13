@@ -13,7 +13,7 @@ public class SoundManger : MonoBehaviour
     public AudioClip bgmClip;
     public float bgmVolume;
     public AudioSource bgmPlayer;
-
+    /*
     [Header("#SFX")]
     public AudioClip[] sfxClips;
     public float sfxVolume;
@@ -22,7 +22,7 @@ public class SoundManger : MonoBehaviour
     public int channelIndex;
 
     public enum Sfx { Start, GameOver, Move, Jump, land, Interact, Dameged }
-
+    */
     void Awake()
     {
         instance = this; //메모리에 사운드 매니저를 할당
@@ -39,7 +39,7 @@ public class SoundManger : MonoBehaviour
         bgmPlayer.volume = bgmVolume;
         bgmPlayer.clip = bgmClip;
 
-
+        /*
         // 효과음 플레이어 초기화
         GameObject sfxObject = new GameObject("SfxPlayer");
         sfxObject.transform.parent = transform;
@@ -51,6 +51,7 @@ public class SoundManger : MonoBehaviour
             sfxPlayers[i].playOnAwake = false;
             sfxPlayers[i].volume = sfxVolume;
         }
+        */
         PlayBgm();
     }
     void PlayBgm()
@@ -67,8 +68,9 @@ public class SoundManger : MonoBehaviour
     }
     void UpdateSfxVolume(float volume)
     {
-        sfxPlayers[0].volume = volume;
+        //sfxPlayers[0].volume = volume;
     }
+    /*
     void PlaySfx(Sfx sfx)
     {
         //사용형식
@@ -85,4 +87,5 @@ public class SoundManger : MonoBehaviour
 
         }
     }
+    */
 }

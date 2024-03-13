@@ -5,64 +5,50 @@ using UnityEngine.Events;
 
 public class press : MonoBehaviour
 {
-    public UnityEvent press_zone_event;
+    public float start_delay;
     public float press_length;
     public float press_speed_up;
     public float press_speed_down;
     private float press_speed;
-    private BoxCollider2D col;
-    private bool flag = false;
-    private Vector3 startpos;
-    private Vector3 endpos;
+    public Vector3 startpos;
+    public Vector3 endpos;
     private Vector3 chasingpos;
+    Object_Sound sound;
     private void Start()
     {
-        col = GetComponent<BoxCollider2D>();
-        col.enabled = false;
-        startpos = transform.position;
-        endpos = new Vector3(transform.position.x, transform.position.y - press_length, 0);
         chasingpos = endpos;
         press_speed = press_speed_down;
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("player"))
-        {
-            Debug.Log("ÇÁ·¹½º°¡ ÇÃ·¹ÀÌ¾î Å¸°İ");
-        }
+        sound = GetComponent<Object_Sound>();
     }
     private void FixedUpdate()
     {
-        if (flag)
-            transform.position = Vector3.MoveTowards(transform.position, chasingpos, Time.deltaTime * press_speed);
+        transform.position = Vector3.MoveTowards(transform.position, chasingpos, Time.deltaTime * press_speed);
+    }
+    private void Update()
+    {
         check_pos();
     }
     void check_pos()
     {
-        if (flag && transform.position.Equals(endpos))//¹Ù´ÚÀ»ÂïÀ¸¸é ´Ù½Ã ¿Ã¶ó¿À°Ô
+        if (transform.position.Equals(endpos))//ë°”ë‹¥ì„ì°ìœ¼ë©´ ë‹¤ì‹œ ì˜¬ë¼ì˜¤ê²Œ
         {
-            chasingpos = startpos;
-            press_speed = press_speed_up;
+            Invoke("bottom", start_delay);
+            if (!sound.isplay()) sound.PlaySfx(0);
         }
-        if (flag && transform.position.Equals(startpos))//¿Ã¶ó¿ÔÀ¸¸é ÇÁ·¹½º°¡ ¸ØÃß°Ô
+        else if (transform.position.Equals(startpos))//ì˜¬ë¼ì™”ìœ¼ë©´ í”„ë ˆìŠ¤ê°€ ë©ˆì¶”ê²Œ
         {
-            flag = false;
-            chasingpos = endpos;
-            press_speed = press_speed_down;
-            press_zone_event.Invoke();
+            Invoke("top", start_delay);
         }
     }
-    public void press_on()
+    void top()
     {
-        flag = true;
-        col.enabled = true;
-        Debug.Log("ÇÁ·¹½º ÀÛµ¿");
+        chasingpos = endpos;
+        press_speed = press_speed_down;
     }
-    public void press_off()
+    void bottom()
     {
-        flag = false;
-        col.enabled = false;
-        Debug.Log("ÇÁ·¹½º Á¤Áö");
+        chasingpos = startpos;
+        press_speed = press_speed_up;
     }
 }
 
@@ -71,67 +57,67 @@ public class press : MonoBehaviour
 public class press : MonoBehaviour
 {
     SpriteRenderer sr;
-    public LayerMask press_groundLayer; // ¹Ù´Ú ·¹ÀÌ¾î
-    public LayerMask press_PlayerLayer; // ÇÃ·¹ÀÌ¾î ·¹ÀÌ¾î
-    private float press_raydistance; // ·¹ÀÌÀÇ ±æÀÌ
-    private int Max_distance = 8; // ¹Ù´ÚÀ» °¨ÁöÇÒ ·¹ÀÌÀÇ ±æÀÌ
+    public LayerMask press_groundLayer; // ë°”ë‹¥ ë ˆì´ì–´
+    public LayerMask press_PlayerLayer; // í”Œë ˆì´ì–´ ë ˆì´ì–´
+    private float press_raydistance; // ë ˆì´ì˜ ê¸¸ì´
+    private int Max_distance = 8; // ë°”ë‹¥ì„ ê°ì§€í•  ë ˆì´ì˜ ê¸¸ì´
     private Vector2 bottomLeftPoint;
     private Vector2 bottomRightPoint;
     private void Start()
     {
         sr = GetComponent<SpriteRenderer>();
-        // ½ºÇÁ¶óÀÌÆ®ÀÇ ¿ŞÂÊ ¾Æ·¡ ²ÀÁşÁ¡°ú ¿À¸¥ÂÊ ¾Æ·¡ ²ÀÁşÁ¡ÀÇ ÁÂÇ¥
+        // ìŠ¤í”„ë¼ì´íŠ¸ì˜ ì™¼ìª½ ì•„ë˜ ê¼­ì§“ì ê³¼ ì˜¤ë¥¸ìª½ ì•„ë˜ ê¼­ì§“ì ì˜ ì¢Œí‘œ
         bottomLeftPoint = new Vector2(sr.bounds.min.x, sr.bounds.min.y);
         bottomRightPoint = new Vector2(sr.bounds.max.x, sr.bounds.min.y);
-        // ½ºÇÁ¶óÀÌÆ®¿Í Áö¸é°úÀÇ °Å¸®¿¡ ¸Â°Ô ÇÃ·¹ÀÌ¾î¸¦ °¨ÁöÇÏ´Â ·¹ÀÌÀÇ ±æÀÌ¸¦ ¼³Á¤
+        // ìŠ¤í”„ë¼ì´íŠ¸ì™€ ì§€ë©´ê³¼ì˜ ê±°ë¦¬ì— ë§ê²Œ í”Œë ˆì´ì–´ë¥¼ ê°ì§€í•˜ëŠ” ë ˆì´ì˜ ê¸¸ì´ë¥¼ ì„¤ì •
         check_ground_distance();
     }
     private void Update()
     {
-        // ¿ŞÂÊ ¾Æ·¡ ²ÀÁşÁ¡¿¡¼­ ¹Ù´Ú ¹æÇâÀ¸·Î ·¹ÀÌ¸¦ ½ô
+        // ì™¼ìª½ ì•„ë˜ ê¼­ì§“ì ì—ì„œ ë°”ë‹¥ ë°©í–¥ìœ¼ë¡œ ë ˆì´ë¥¼ ì¨
         RaycastHit2D leftRaycastHit = Physics2D.Raycast(bottomLeftPoint, Vector2.down, press_raydistance, press_PlayerLayer);
         Debug.DrawRay(bottomLeftPoint, Vector2.down * press_raydistance, new Color(0, 1, 0, 1));
-        // ¿À¸¥ÂÊ ¾Æ·¡ ²ÀÁşÁ¡¿¡¼­ ¹Ù´Ú ¹æÇâÀ¸·Î ·¹ÀÌ¸¦ ½ô
+        // ì˜¤ë¥¸ìª½ ì•„ë˜ ê¼­ì§“ì ì—ì„œ ë°”ë‹¥ ë°©í–¥ìœ¼ë¡œ ë ˆì´ë¥¼ ì¨
         RaycastHit2D rightRaycastHit = Physics2D.Raycast(bottomRightPoint, Vector2.down, press_raydistance, press_groundLayer);
         Debug.DrawRay(bottomRightPoint, Vector2.down * press_raydistance, new Color(0, 1, 0, 1));
 
-        // ·¹ÀÌ¸¦ ½ğ °á°ú¸¦ È®ÀÎÇÏ¿© ¹Ù´Ú°ú Ãæµ¹Çß´ÂÁö Ã¼Å©
+        // ë ˆì´ë¥¼ ìœ ê²°ê³¼ë¥¼ í™•ì¸í•˜ì—¬ ë°”ë‹¥ê³¼ ì¶©ëŒí–ˆëŠ”ì§€ ì²´í¬
         if ((leftRaycastHit.collider != null) || (rightRaycastHit.collider != null))
         {
-            Debug.Log("ÇÁ·¹½º °¨Áö¹üÀ§¿¡ ÇÃ·¹ÀÌ¾î°¡ Ãæµ¹!");
+            Debug.Log("í”„ë ˆìŠ¤ ê°ì§€ë²”ìœ„ì— í”Œë ˆì´ì–´ê°€ ì¶©ëŒ!");
         }
     }
     void check_ground_distance()
     {
         float left_distance;
         float right_distance;
-        // ¿ŞÂÊ ¾Æ·¡ ²ÀÁşÁ¡¿¡¼­ ¹Ù´Ú ¹æÇâÀ¸·Î ·¹ÀÌ¸¦ ½ô
+        // ì™¼ìª½ ì•„ë˜ ê¼­ì§“ì ì—ì„œ ë°”ë‹¥ ë°©í–¥ìœ¼ë¡œ ë ˆì´ë¥¼ ì¨
         RaycastHit2D leftRaycastHit = Physics2D.Raycast(bottomLeftPoint, Vector2.down, Max_distance, press_groundLayer);
-        // ·¹ÀÌ¸¦ ½ğ °á°ú¸¦ È®ÀÎÇÏ¿© ¹Ù´Ú°ú Ãæµ¹Çß´ÂÁö Ã¼Å©
+        // ë ˆì´ë¥¼ ìœ ê²°ê³¼ë¥¼ í™•ì¸í•˜ì—¬ ë°”ë‹¥ê³¼ ì¶©ëŒí–ˆëŠ”ì§€ ì²´í¬
         if (leftRaycastHit.collider != null)
         {
             left_distance = Vector2.Distance(bottomLeftPoint, leftRaycastHit.point);
-            Debug.Log("¿ŞÂÊ¾Æ·¡¿¡¼­ ¹Ù´Ú°ú Ãæµ¹! °Å¸®: " + left_distance);
+            Debug.Log("ì™¼ìª½ì•„ë˜ì—ì„œ ë°”ë‹¥ê³¼ ì¶©ëŒ! ê±°ë¦¬: " + left_distance);
         }
         else
         {
             left_distance = Max_distance;
-            Debug.Log("¿ŞÂÊ¾Æ·¡¿¡¼­ ¹Ù´Ú°ú Ãæµ¹ÇÏÁö ¾ÊÀ½ ÃÖ´ë °Å¸®: " + left_distance);
+            Debug.Log("ì™¼ìª½ì•„ë˜ì—ì„œ ë°”ë‹¥ê³¼ ì¶©ëŒí•˜ì§€ ì•ŠìŒ ìµœëŒ€ ê±°ë¦¬: " + left_distance);
         }
-        // ¿À¸¥ÂÊ ¾Æ·¡ ²ÀÁşÁ¡¿¡¼­ ¹Ù´Ú ¹æÇâÀ¸·Î ·¹ÀÌ¸¦ ½ô
+        // ì˜¤ë¥¸ìª½ ì•„ë˜ ê¼­ì§“ì ì—ì„œ ë°”ë‹¥ ë°©í–¥ìœ¼ë¡œ ë ˆì´ë¥¼ ì¨
         RaycastHit2D rightRaycastHit = Physics2D.Raycast(bottomRightPoint, Vector2.down, Max_distance, press_groundLayer);
-        // ·¹ÀÌ¸¦ ½ğ °á°ú¸¦ È®ÀÎÇÏ¿© ¹Ù´Ú°ú Ãæµ¹Çß´ÂÁö Ã¼Å©
+        // ë ˆì´ë¥¼ ìœ ê²°ê³¼ë¥¼ í™•ì¸í•˜ì—¬ ë°”ë‹¥ê³¼ ì¶©ëŒí–ˆëŠ”ì§€ ì²´í¬
         if (rightRaycastHit.collider != null)
         {
             right_distance = Vector2.Distance(bottomRightPoint, rightRaycastHit.point);
-            Debug.Log("¿ŞÂÊ¾Æ·¡¿¡¼­ ¹Ù´Ú°ú Ãæµ¹! °Å¸®: " + right_distance);
+            Debug.Log("ì™¼ìª½ì•„ë˜ì—ì„œ ë°”ë‹¥ê³¼ ì¶©ëŒ! ê±°ë¦¬: " + right_distance);
         }
         else
         {
             right_distance = Max_distance;
-            Debug.Log("¿ŞÂÊ¾Æ·¡¿¡¼­ ¹Ù´Ú°ú Ãæµ¹ÇÏÁö ¾ÊÀ½ ÃÖ´ë °Å¸®: " + right_distance);
+            Debug.Log("ì™¼ìª½ì•„ë˜ì—ì„œ ë°”ë‹¥ê³¼ ì¶©ëŒí•˜ì§€ ì•ŠìŒ ìµœëŒ€ ê±°ë¦¬: " + right_distance);
         }
-        //ÇÁ·¹½ºÀÇ °¨Áö ±æÀÌ´Â 2°³ÀÇ ·¹ÀÌ Áß ÂªÀº °ÍÀ¸·Î ¼±ÅÃ
+        //í”„ë ˆìŠ¤ì˜ ê°ì§€ ê¸¸ì´ëŠ” 2ê°œì˜ ë ˆì´ ì¤‘ ì§§ì€ ê²ƒìœ¼ë¡œ ì„ íƒ
         press_raydistance = (left_distance < right_distance) ? left_distance : right_distance;
     }
 }

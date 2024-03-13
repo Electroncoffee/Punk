@@ -9,4 +9,9 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene(SceneName);
     }
+    public void GameSceneCtrl2(string SceneName)
+    {
+        Temp_Save.instance.update_savedata();
+        SceneManager.LoadScene(SceneName);
+    }
 }

@@ -216,7 +216,7 @@ MonoBehaviour:
   getDamage:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 968710782075721267, guid: 92588b2a4af082d4dbe0be1f06dab047, type: 3}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: playerMoveMent, Assembly-CSharp
         m_MethodName: hit
         m_Mode: 1
@@ -231,7 +231,7 @@ MonoBehaviour:
   dead:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 968710782075721267, guid: 92588b2a4af082d4dbe0be1f06dab047, type: 3}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: playerMoveMent, Assembly-CSharp
         m_MethodName: dead
         m_Mode: 1
@@ -243,7 +243,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4753055808939329140, guid: 8cfe5764c3b6f984b947e491ea6cc14c, type: 3}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6

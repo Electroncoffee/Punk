@@ -6,7 +6,8 @@ using UnityEngine.Events;
 public class hp : MonoBehaviour
 {
     const int maxhp = 3;
-    int current_hp = 3;
+    [SerializeField]
+    int current_hp;
     public UnityEvent getDamage;
     public UnityEvent dead;
     public HpUi hpUi;
@@ -17,7 +18,17 @@ public class hp : MonoBehaviour
     */
     private void Start()
     {
-        hpUi.StartSetHpUI(maxhp);
+        if (Temp_Save.instance.flag)
+        {
+            current_hp = Temp_Save.instance.loadhp();
+            hpUi.StartSetHpUI(Temp_Save.instance.loadhp());
+        }
+        else
+        {
+            current_hp = maxhp;
+            hpUi.StartSetHpUI(maxhp);
+        }
+        
     }
     public void damage(int d){
         current_hp -= d;
@@ -25,17 +36,12 @@ public class hp : MonoBehaviour
         
         if(current_hp > 0){
             getDamage.Invoke(); //캐릭터 피해모션 재생함수
+            Fade.instance.Transition(0.1f,5);
         }
         else
         {
             dead.Invoke();//사망모션
         }
     }
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            damage(1);//데미지 입히기
-        }
-    }
+    public int return_hp() { return current_hp; }
 }

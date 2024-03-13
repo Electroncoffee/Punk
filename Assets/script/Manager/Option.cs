@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Option : MonoBehaviour
 {
+    public static Option instance;
     [SerializeField]
     GameObject opt;
     void Awake()
     {
+        if (instance == null) instance = this;
+        else Destroy(gameObject);
         opt.SetActive(false);
     }
 
@@ -16,8 +19,12 @@ public class Option : MonoBehaviour
     {
         if (InputManager.Instance.GetKeyDownP(KeyMap.Menu))
         {
-            opt.SetActive(!opt.activeSelf);
-            Time.timeScale = opt.activeSelf ? 0 : 1;
+            MenuIO();
         }
+    }
+    public void MenuIO()
+    {
+        opt.SetActive(!opt.activeSelf);
+        Time.timeScale = opt.activeSelf ? 0 : 1;
     }
 }

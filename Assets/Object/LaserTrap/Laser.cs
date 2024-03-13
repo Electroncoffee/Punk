@@ -1,17 +1,49 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Burst.CompilerServices;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-/* ==°£´Ü¼³¸í==
- * Y Flip¿©ºÎ¸¦ È®ÀÎÇÏ°í ·¹ÀÌ ¹æÇâÀ» °áÁ¤
- * ·¹ÀÌ¿¡ Player·¹ÀÌ¾î°¡ ´êÀ¸¸é ·Î±×Ãâ·Â
- * ·¹ÀÌÀÇ ±æÀÌ´Â PublicÀ¸·Î ¼³Á¤
+/* ==ê°„ë‹¨ì„¤ëª…==
+ * Y Flipì—¬ë¶€ë¥¼ í™•ì¸í•˜ê³  ë ˆì´ ë°©í–¥ì„ ê²°ì •
+ * ë ˆì´ì— Playerë ˆì´ì–´ê°€ ë‹¿ìœ¼ë©´ ë¡œê·¸ì¶œë ¥
+ * ë ˆì´ì˜ ê¸¸ì´ëŠ” Publicìœ¼ë¡œ ì„¤ì •
  * 
- * ÇÃ·¹ÀÌ¾î ·¹ÀÌ Ãæµ¹ ½Ã ÇÇ°İÆÇÁ¤ ¿ÀºêÁ§Æ® »ı¼º
+ * í”Œë ˆì´ì–´ ë ˆì´ ì¶©ëŒ ì‹œ í”¼ê²©íŒì • ì˜¤ë¸Œì íŠ¸ ìƒì„±
  */
 public class Laser : MonoBehaviour
+{
+    [SerializeField]
+    GameObject beam;
+    [SerializeField]
+    float delay_time;
+    Animator animator;
+    bool t=true;
+    [SerializeField]
+    bool is_reload;
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+        Invoke("delay", delay_time);
+    }
+    void delay()
+    {
+        animator.SetBool("Delay", t);
+    }
+    void ready()
+    {
+        beam.GetComponent<beam_line>().ready();
+    }
+    void shot()
+    {
+        beam.GetComponent<beam_line>().shot();
+    }
+    void reload()
+    {
+        if(is_reload) beam.GetComponent<beam_line>().reload();
+    }
+}
+
+/*
+ public class Laser : MonoBehaviour
 {
     SpriteRenderer spriterenderer;
     BoxCollider2D boxCollider;
@@ -28,7 +60,7 @@ public class Laser : MonoBehaviour
     //Max Possible Length
     float distanceToHit;
 
-    //¶óÀÎ·»´õ·¯ ÄÚµå
+    //ë¼ì¸ë Œë”ëŸ¬ ì½”ë“œ
     [SerializeField]
     private beam_line visualizer_line;
     void Start()
@@ -51,7 +83,7 @@ public class Laser : MonoBehaviour
         
         //rayHit = Physics2D.Raycast(vec, direction, Max_Ray_Length, LayerMask.GetMask(""));
         rayHit = Physics2D.Raycast(vec, direction, Max_Ray_Length, LayerMask.GetMask("Platform"));
-        //Set Beam_Length (ÀÓÀÇ ¼³Á¤) 
+        //Set Beam_Length (ì„ì˜ ì„¤ì •) 
         if (rayHit.collider != null)
             distanceToHit = rayHit.distance;
         else
@@ -73,10 +105,10 @@ public class Laser : MonoBehaviour
     }
     void Shot_Laser()
     {
-        // Y´Â ÁÂÇ¥°ª+±âº»¼öÁ¤Ä¡
+        // YëŠ” ì¢Œí‘œê°’+ê¸°ë³¸ìˆ˜ì •ì¹˜
         Vector2 beamvec = new Vector2(transform.position.x, transform.position.y + 0.5f);
         Vector2 beamvec_end = new Vector2(transform.position.x, transform.position.y + 0.5f + distanceToHit);
-        //¶óÀÎ·»´õ·¯ ÄÚµå
+        //ë¼ì¸ë Œë”ëŸ¬ ì½”ë“œ
         visualizer_line.Play(beamvec, beamvec_end);
     }
     void HitCheckOn()
@@ -85,3 +117,4 @@ public class Laser : MonoBehaviour
         visualizer_line.Stop();
     }
 }
+ */

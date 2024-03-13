@@ -5,36 +5,33 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/StartScene.unity
     guid: b02a5a1615b0dff4c807a509c5b45d1e
   - enabled: 1
     path: Assets/Scenes/Stage 1-1.unity
     guid: bbe0abaa37b77574aa30d811177cac80
+  - enabled: 1
+    path: Assets/Scenes/Stage 1-2.unity
+    guid: 4ea9b5456d351294e80bac67f625333d
+  - enabled: 1
+    path: Assets/Scenes/Stage 2-1.unity
+    guid: fdeef81db090c954ea3f296041a049aa
+  - enabled: 1
+    path: Assets/Scenes/Stage 2-2.unity
+    guid: 9815a630580264c44a2a4cd8dbb25804
+  - enabled: 1
+    path: Assets/Scenes/Stage 2-3.unity
+    guid: 2dee814505019a54999b9f0455c7a810
+  - enabled: 1
+    path: Assets/Scenes/EndScene.unity
+    guid: 198dc33cd9a371c40bc5a86e33f3a5be
   - enabled: 0
     path: Assets/Scenes/Dialogue.unity
     guid: 8db55d5c915c9584fa7bde46f6b5f094
   - enabled: 0
-    path: Assets/Scenes/UI.unity
-    guid: e3613a9f369bdad4aa5b818dcd95297e
-  - enabled: 0
     path: Assets/Scenes/SampleScene 1.unity
     guid: 8469627ba916e5e45a020f8a831ee756
-  - enabled: 0
-    path: Assets/Scenes/Stage 1-2.unity
-    guid: 4ea9b5456d351294e80bac67f625333d
-  - enabled: 0
-    path: Assets/Scenes/Stage 2-1.unity
-    guid: fdeef81db090c954ea3f296041a049aa
-  - enabled: 0
-    path: Assets/Scenes/Stage 2-2.unity
-    guid: 9815a630580264c44a2a4cd8dbb25804
-  - enabled: 0
-    path: Assets/Scenes/Stage 2-3.unity
-    guid: 2dee814505019a54999b9f0455c7a810
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 951277dd18852bc41b3bdbcfab95c1a0, type: 2}
     com.unity.localization.settings: {fileID: 11400000, guid: cc70300c3d128a0408733fa5040e4dd8, type: 2}

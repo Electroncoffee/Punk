@@ -47,6 +47,10 @@ public class playerMoveMent : MonoBehaviour
     public float deadAnimTime = 2f;
     private bool move = true;
 
+    public float slimeMaxSpeed;
+    public float slimeDeccel;
+    public float runtempMaxSpeed;
+    public float runtempDeccel;
     public float runMaxSpeed;
     public float runAccel;
     public float runDeccel;
@@ -58,10 +62,16 @@ public class playerMoveMent : MonoBehaviour
     public float Rate;
     public float gravity = 8f;
 
-    private string[] grounds = { "ground", "platform" };//밟을 수 있는 레이어이름 배열
+    private string[] grounds = { "ground", "platform","slime" };//밟을 수 있는 레이어이름 배열
     private string playerlayer = "player";
     private string platformlayer = "platform";
 
+    [SerializeField]
+    public bool cansecondjump;
+    [SerializeField]
+    public bool canwalljump;
+    [SerializeField]
+    public bool candash;
     void Start()
     {   //컴포넌트 불러오기
         rb = GetComponent<Rigidbody2D>();
@@ -74,6 +84,18 @@ public class playerMoveMent : MonoBehaviour
         anim = GetComponent<Animator>();
         spRend = GetComponent<SpriteRenderer>();
         rb.gravityScale = gravity;
+        if (Temp_Save.instance.flag)
+        {
+            cansecondjump = Temp_Save.instance.loadskill()[0];
+            canwalljump = Temp_Save.instance.loadskill()[1];
+            candash = Temp_Save.instance.loadskill()[2];
+        }
+        else
+        {
+            cansecondjump = true;
+            canwalljump = false;
+            candash = false;
+        }
     }
 
     void Update()
@@ -85,7 +107,7 @@ public class playerMoveMent : MonoBehaviour
         look();
 
         //벽 점프
-        if (rightcol.IsTouchingLayers(LayerMask.GetMask("ground")) && InputManager.Instance.GetKeyP(KeyMap.Right))
+        if (canwalljump && rightcol.IsTouchingLayers(LayerMask.GetMask("wallgrab")) && InputManager.Instance.GetKeyP(KeyMap.Right))
         {
             wallGrab();
             spRend.flipX = false;
@@ -93,7 +115,7 @@ public class playerMoveMent : MonoBehaviour
             wallJump(true);
 
         }
-        else if (leftcol.IsTouchingLayers(LayerMask.GetMask("ground")) && InputManager.Instance.GetKeyP(KeyMap.Left))
+        else if (canwalljump && leftcol.IsTouchingLayers(LayerMask.GetMask("wallgrab")) && InputManager.Instance.GetKeyP(KeyMap.Left))
         {
             wallGrab();
             spRend.flipX = true;
@@ -120,7 +142,6 @@ public class playerMoveMent : MonoBehaviour
         {
             movement();
         }
-
         //점프 기능
         if (isGround && InputManager.Instance.GetKeyDownP(KeyMap.Jump) && !Dashing)
         {
@@ -130,13 +151,12 @@ public class playerMoveMent : MonoBehaviour
                 Jump();
         }
         //이단점프
-        if (!isGround && secondJumpAble && InputManager.Instance.GetKeyDownP(KeyMap.Jump) && !Dashing && !grabWall)
+        if (cansecondjump && !isGround && secondJumpAble && InputManager.Instance.GetKeyDownP(KeyMap.Jump) && !Dashing && !grabWall)
         {
             secondJump();
         }
-
         //대쉬 기능
-        if (able_dash && dashT > dashCoolTime && InputManager.Instance.GetKeyDownP(KeyMap.Dash))
+        if (candash && able_dash && dashT > dashCoolTime && InputManager.Instance.GetKeyDownP(KeyMap.Dash))
         {
             if (InputManager.Instance.GetKeyP(KeyMap.Left))
             {
@@ -154,7 +174,6 @@ public class playerMoveMent : MonoBehaviour
         //마지막 업데이트
         updateLast();
     }
-
     private void updateSetup()
     {
         isGround = false;
@@ -162,6 +181,16 @@ public class playerMoveMent : MonoBehaviour
         {
             if (bottomcol.IsTouchingLayers(LayerMask.GetMask(layer)))
             {
+                if (bottomcol.IsTouchingLayers(LayerMask.GetMask("slime")))
+                {
+                    runMaxSpeed = slimeMaxSpeed;
+                    runDeccel = slimeDeccel;
+                }
+                else
+                {
+                    runMaxSpeed = runtempMaxSpeed;
+                    runDeccel=runtempDeccel;
+                }
                 isGround = true;
                 break;
             }
@@ -425,7 +454,7 @@ public class playerMoveMent : MonoBehaviour
             {
                 changeAnim((int)animIndex.idle);
             }
-            else if (run && !Crouch && isGround)
+            else if (run && !Crouch && isGround&&rb.velocity.x!=0f)
             {
                 changeAnim((int)animIndex.run);
             }
@@ -568,5 +597,10 @@ public class playerMoveMent : MonoBehaviour
         changeAnim((int)animIndex.dead);
         move = false;
         this.GetComponent<playerMoveMent>().enabled = false;
+        this.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+    }
+    public bool[] return_skill_value()
+    {
+        return new bool[] { cansecondjump, canwalljump, candash };
     }
 }

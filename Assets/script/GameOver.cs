@@ -9,7 +9,8 @@ public class GameOver : MonoBehaviour
     {//사망시 활성화
         if (InputManager.Instance.GetKeyP(KeyMap.Act))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene("StartScene");
+            Temp_Save.instance.flag = false;
         }
     }
 }

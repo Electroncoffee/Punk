@@ -2511,6 +2511,31 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Grass_Tile92_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1008
+        width: 96
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -48, y: 24}
+        - {x: -48, y: -24}
+        - {x: -16, y: -24}
+        - {x: -16, y: 24}
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc1f83319335464449de5d84f9bbeda1
+      internalID: -798713167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -2524,6 +2549,7 @@ TextureImporter:
     nameFileIdTable:
       "\uD0C0\uC77C\uC14B \uD480\uBC2D 2\uBC30_4": 1527212337
       "\uD0C0\uC77C\uC14B \uD480\uBC2D 2\uBC30_86": 772037970
+      Grass_Tile92_2: -798713167
       "\uD0C0\uC77C\uC14B \uD480\uBC2D 2\uBC30_47": 2122284166
       "\uD0C0\uC77C\uC14B \uD480\uBC2D 2\uBC30_27": 531925779
       "\uD0C0\uC77C\uC14B \uD480\uBC2D 2\uBC30_30": 1947080437

@@ -14,7 +14,7 @@ public class SoundOption : MonoBehaviour
     void Start()
     {
         bgmSlider.value = SoundManger.instance.bgmVolume;
-        sfxSlider.value = SoundManger.instance.sfxVolume;
+        sfxSlider.value = SoundManger.instance.bgmVolume;
     }
 
     public void UpdatebgmVolume()
@@ -22,9 +22,8 @@ public class SoundOption : MonoBehaviour
         SoundManger.instance.bgmPlayer.volume = bgmSlider.value;
 
     }
-    public void UpdatesfxVolume()
+    public float ReturnsfxVolume()
     {
-        SoundManger.instance.sfxPlayers[0].volume = sfxSlider.value;
+        return sfxSlider.value;
     }
-
 }

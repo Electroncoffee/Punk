@@ -208,6 +208,7 @@ GameObject:
   - component: {fileID: 3754253456361143460}
   - component: {fileID: 3754253456361143461}
   - component: {fileID: 1843783068}
+  - component: {fileID: 1123979829}
   m_Layer: 5
   m_Name: Dialogue Canvas
   m_TagString: Untagged
@@ -307,6 +308,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 197ad2a81a115bd4181d56c471b66474, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1123979829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3754253456361143462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c959ffdbb539c3f40b73027ffb171625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3754253456533381606
@@ -717,7 +730,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &385493021014105407
 RectTransform:
   m_ObjectHideFlags: 0

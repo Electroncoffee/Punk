@@ -8,27 +8,30 @@ public class Scan_Object : MonoBehaviour
 {
     GameObject ScanObject;
     playerMoveMent moveMent;
+    Rigidbody2D rb;
     public bool isNPC; //NPC Trigger 충돌여부
     private void Start()
     {
         isNPC = false;
-        moveMent = this.gameObject.GetComponent<playerMoveMent>();
+        moveMent = GetComponent<playerMoveMent>();
+        rb=GetComponent<Rigidbody2D>();
     }
     private void Update()
     {
         if (InputManager.Instance.GetKeyUpP(KeyMap.Act) && isNPC) //트리거에 대화가능 오브젝트 진입시 F버튼으로 대화 진입
         {
             Debug.Log("다이얼로그 작동");
-            if (moveMent.enabled)
+            
+            if (rb.constraints == RigidbodyConstraints2D.FreezeRotation)
             {
                 TalkManager.Instance.start_dialogue(ScanObject.GetComponent<NPC_info>().return_xmlname());
-                moveMent.enabled = false;
+                rb.constraints = RigidbodyConstraints2D.FreezeAll;
             }
             else
             {
                 TalkManager.Instance.next_dialogue();
                 if (!TalkManager.Instance.visible.activeSelf)
-                    moveMent.enabled = true;
+                    rb.constraints = RigidbodyConstraints2D.FreezeRotation;
             }
         }
     }
